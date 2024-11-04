@@ -1,4 +1,9 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'config/routes/app_routes.dart';
+import 'features/homeLayout.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -6,8 +11,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          home: HomeLayout(),
+          onGenerateRoute: (settings) =>AppRoute.onGenerate(settings) ,
+          debugShowCheckedModeBanner: false,
+        );
+      },
     );
   }
 }
