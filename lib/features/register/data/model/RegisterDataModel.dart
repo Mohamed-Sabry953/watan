@@ -18,7 +18,7 @@ class RegisterDataModel {
     accessToken = json['access_token'];
     msg = json['msg'];
   }
-  String? success;
+  bool? success;
   String? accessToken;
   String? msg;
 

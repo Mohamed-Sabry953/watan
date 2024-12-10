@@ -7,7 +7,7 @@ class RegisterApiService {
 
   RegisterApiService(this.dio);
 
-  Future<Response> post({
+  Future<Response> signup({
     required String url,
     required String name,
     required String email,
@@ -35,4 +35,26 @@ class RegisterApiService {
     );
     return response;
   }
+  Future<Response> sendVerifyCode(String email) async {
+    Map<String, dynamic> otpData = {
+      "email": email,
+    };
+    var response=await dio.post(
+      ApiConstance.sendVerifyCode,
+      data: otpData,
+    );
+    return response;
+  }
+  Future<Response> verifyEmail(String email,String otp) async {
+    Map<String, dynamic> verifyEmailData = {
+      "email": email,
+      "otp": otp,
+    };
+    var response=await dio.post(
+      ApiConstance.verifyEmail,
+      data: verifyEmailData,
+    );
+    return response;
+  }
+
 }

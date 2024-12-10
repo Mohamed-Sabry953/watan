@@ -1,14 +1,13 @@
 import 'package:final_project_2024/config/routes/app_routes.dart';
 import 'package:final_project_2024/core/utils/widgets/errorMessage.dart';
-import 'package:final_project_2024/features/register/presentation/widgets/register_textfeild.dart';
+import 'package:final_project_2024/features/register/presentation/widgets/registerWidgets/register_textfeild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pressable_flutter/pressable_flutter.dart';
 
-import '../../../../core/services/responsiveUi/responsive_height.dart';
-import '../../../../core/services/responsiveUi/responsive_width.dart';
-import '../manger/register_cubit.dart';
+import '../../../../../core/services/responsiveUi/responsive_height.dart';
+import '../../../../../core/services/responsiveUi/responsive_width.dart';
+import '../../manger/register_cubit.dart';
 
 class SignupPage extends StatelessWidget {
    SignupPage({super.key});
@@ -25,6 +24,7 @@ class SignupPage extends StatelessWidget {
           child: Form(
             key: formkey,
             child: Container(
+              margin: REdgeInsetsDirectional.only(top: 30),
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +91,7 @@ class SignupPage extends StatelessWidget {
                               widgetHeight(context: context, height: 58))
                       ),
                       onPressed: (){
-                        RegisterCubit.get(context).postSignup(name.text, email.text, password.text, confirmPassword.text);
+                        RegisterCubit.get(context).postSignup(name:name.text,email:email.text,password: password.text,confirmPassword: confirmPassword.text);
                       }, child: Center(
                       child: Text("Sign up",
                         style: TextStyle(
@@ -110,7 +110,7 @@ class SignupPage extends StatelessWidget {
     listener: (context, state) {
       if(state is SignupLoading){
         showDialog(context: context, builder: (context) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },);
@@ -118,13 +118,13 @@ class SignupPage extends StatelessWidget {
       else if(state is SignupFailure){
         Navigator.pop(context);
         showDialog(context: context, builder: (context) {
-          return errorMessage(text: "This email is already used");
+          return const ErrorMessage(text: "This email is already used");
         },);
       }
          else if(state is SignupSuccess){
           Navigator.pop(context);
-          Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.homeLayout, (route) => false,);
-      }
+          Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.emailVerification, (route) => false,);
+         }
     },
     );
   }

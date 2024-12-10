@@ -14,7 +14,6 @@ final class SignupFailure extends RegisterState {
 }
 final class SignupSuccess extends RegisterState {
   final Response registerItem;
-
   SignupSuccess(this.registerItem);
 }
 final class LoginLoading extends RegisterState {}
@@ -26,4 +25,14 @@ final class LoginSuccess extends RegisterState {
   final Response registerItem;
 
   LoginSuccess(this.registerItem);
+}
+final class SentVerifyCodeSucState extends RegisterState {
+  final Response response;
+  SentVerifyCodeSucState(this.response);
+}
+final class SentVerifyCodeFailState extends RegisterState {
+  final String errMessage;
+  SentVerifyCodeFailState(this.errMessage);
+
+
 }

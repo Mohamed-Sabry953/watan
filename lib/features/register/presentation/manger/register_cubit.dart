@@ -1,10 +1,8 @@
-import 'package:bloc/bloc.dart';
+
 import 'package:dio/dio.dart';
-import 'package:final_project_2024/features/register/data/model/RegisterDataModel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 
 import '../../data/repo/register_repo.dart';
 
@@ -16,6 +14,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   static RegisterCubit get(context) => BlocProvider.of(context);
   bool checkBox = false;
+  String verifictionEmail="";
   CrossFadeState registerCrossFadeState = CrossFadeState.showFirst;
 
   void checkBoxOperate() {
@@ -33,7 +32,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(BackFadeState());
   }
 
-  Future<void> postSignup(String name,String email,String password,String confirmPassword,) async {
+  Future<void> postSignup(
+      {
+    required String name,
+    required String email,
+    required String password,
+    required String confirmPassword,
+  }) async {
     emit(SignupLoading());
     var result = await registerRepo.signup(
         name: name,
@@ -42,9 +47,30 @@ class RegisterCubit extends Cubit<RegisterState> {
         confirmPassword: confirmPassword);
     result.fold(
       (failure) { emit(SignupFailure(failure.errMessage));
-        print(failure.errMessage);
+        if (kDebugMode) {
+          print(failure.errMessage);
+        }
         },
       (registerItem) { emit(SignupSuccess(registerItem),
+      );
+        sendVerifyCode(email: email);
+        if (kDebugMode) {
+          print(registerItem);
+        }
+      }
+    );
+
+  }
+  Future<void> login({required String email, required String password}) async {
+    emit(LoginLoading());
+    var result = await registerRepo.login(
+      email: email,
+      password: password
+    );
+    result.fold(
+      (failure) { emit(LoginFailure(failure.errMessage));
+        },
+      (registerItem) { emit(LoginSuccess(registerItem),
       );
         if (kDebugMode) {
           print(registerItem);
@@ -53,20 +79,37 @@ class RegisterCubit extends Cubit<RegisterState> {
     );
 
   }
-  Future<void> login(String email,String password) async {
+  Future<void> sendVerifyCode({required String email}) async {
     emit(LoginLoading());
-    var result = await registerRepo.login(
+    var result = await registerRepo.sendVerifyCode(
       email: email,
-      password: password
     );
     result.fold(
-      (failure) { emit(LoginFailure(failure.errMessage));
-        print(failure.errMessage);
+      (failure) { emit(SentVerifyCodeFailState(failure.errMessage));
         },
-      (registerItem) { emit(LoginSuccess(registerItem),
+      (response) { emit(SentVerifyCodeSucState(response),
+      );
+      verifictionEmail=email;
+        if (kDebugMode) {
+          print(response);
+        }
+      }
+    );
+
+  }
+  Future<void> verifyEmail({required String email,required String otp}) async {
+    emit(LoginLoading());
+    var result = await registerRepo.verifyEmail(
+      email: email,
+      otp: otp
+    );
+    result.fold(
+      (failure) { emit(SentVerifyCodeFailState(failure.errMessage));
+        },
+      (response) { emit(SentVerifyCodeSucState(response),
       );
         if (kDebugMode) {
-          print(registerItem);
+          print(response);
         }
       }
     );

@@ -18,14 +18,15 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> {
-  List<Widget>pages=[ServicesPage(),HomePage(),ChatPage()];
+  List<Widget>pages=[ServicesPage(),const HomeScreen(),const ChatScreen()];
 
   int currentIndex=1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
+
+      bottomNavigationBar: currentIndex==2?null:CurvedNavigationBar(
         height: 75.h,
         index:1,
         items:  [

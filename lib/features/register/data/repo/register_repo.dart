@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
-import 'package:final_project_2024/features/register/data/model/RegisterDataModel.dart';
-
 import '../../../../core/errors/failure.dart';
 
 abstract class RegisterRepo{
@@ -14,4 +12,6 @@ abstract class RegisterRepo{
     required String confirmPassword,
 }
       );
+  Future<Either<Failure,Response>>sendVerifyCode({required String email});
+  Future<Either<Failure,Response>>verifyEmail({required String email,required String otp});
 }

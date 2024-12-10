@@ -5,6 +5,7 @@ import 'package:final_project_2024/core/errors/failure.dart';
 import 'package:final_project_2024/core/services/APIs/api_register_service.dart';
 import 'package:final_project_2024/core/utils/constant/apiConstance.dart';
 import 'package:final_project_2024/features/register/data/repo/register_repo.dart';
+import 'package:flutter/foundation.dart';
 
 import '../model/RegisterDataModel.dart';
 
@@ -21,7 +22,7 @@ class RegisterRepoImpl implements RegisterRepo {
     required String confirmPassword,
   }) async {
     try {
-      Response data = await registerApiService.post(
+      Response data = await registerApiService.signup(
           url: ApiConstance.registerApiUrl,
           name: name,
           email: email,
@@ -48,10 +49,66 @@ class RegisterRepoImpl implements RegisterRepo {
       }
     }on DioError catch(e){
       if (e.response != null) {
-        print('Login error: ${e.response?.data}');
+        if (kDebugMode) {
+          print('Login error: ${e.response?.data}');
+        }
         return Left(ServerFailure.fromDioError(e));
       } else {
-        print('Login error: ${e.message}');
+        if (kDebugMode) {
+          print('Login error: ${e.message}');
+        }
+        return Left(ServerFailure(e.message!));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, Response>> sendVerifyCode({required String email}) async {
+    try{
+      Response response=await registerApiService.sendVerifyCode(email);
+      if(response.statusCode==200){
+        return Right(response);
+      }
+      else{
+        // print("Login failed: ${response.statusMessage}");
+        return Left(ServerFailure("Login fail${response.statusMessage}"));
+      }
+    }on DioError catch(e){
+      if (e.response != null) {
+        if (kDebugMode) {
+          print('Login error: ${e.response?.data}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      } else {
+        if (kDebugMode) {
+          print('Login error: ${e.message}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, Response>> verifyEmail({required String email, required String otp}) async {
+    try{
+      Response response=await registerApiService.verifyEmail(email, otp);
+      if(response.statusCode==200){
+        return Right(response);
+      }
+      else{
+        // print("Login failed: ${response.statusMessage}");
+        return Left(ServerFailure("Login fail${response.statusMessage}"));
+      }
+    }on DioError catch(e){
+      if (e.response != null) {
+        if (kDebugMode) {
+          print('Login error: ${e.response?.data}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      } else {
+        if (kDebugMode) {
+          print('Login error: ${e.message}');
+        }
         return Left(ServerFailure.fromDioError(e));
       }
     }

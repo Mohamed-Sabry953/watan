@@ -47,6 +47,8 @@ dependencies:
   lottie: ^3.1.3
   curved_labeled_navigation_bar: ^2.0.2
   flutter_svg: ^2.0.10+1
+  image_picker: ^1.1.2
+  pin_code_fields: ^8.0.1
 
 flutter_launcher_icons:
   android: true
@@ -81,6 +83,7 @@ flutter:
     - assets/projectImages/
     - assets/projectImages/register/
     - assets/projectImages/svg/
+    - assets/projectImages/appImages/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

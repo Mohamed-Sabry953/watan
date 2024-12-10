@@ -1,14 +1,14 @@
 import 'package:final_project_2024/core/services/responsiveUi/responsive_height.dart';
 import 'package:final_project_2024/core/services/responsiveUi/responsive_width.dart';
 import 'package:final_project_2024/features/register/presentation/manger/register_cubit.dart';
-import 'package:final_project_2024/features/register/presentation/widgets/register_textfeild.dart';
+import 'package:final_project_2024/features/register/presentation/widgets/registerWidgets/register_textfeild.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pressable_flutter/pressable_flutter.dart';
 
-import '../../../../config/routes/app_routes.dart';
-import '../../../../core/utils/widgets/errorMessage.dart';
+import '../../../../../config/routes/app_routes.dart';
+import '../../../../../core/utils/widgets/errorMessage.dart';
 
 class LoginPage extends StatelessWidget {
    LoginPage({super.key});
@@ -19,6 +19,7 @@ class LoginPage extends StatelessWidget {
     return BlocConsumer<RegisterCubit,RegisterState>(
       builder: (context, state) {
       return  Container(
+        margin:  REdgeInsetsDirectional.only(top: 30),
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +101,7 @@ class LoginPage extends StatelessWidget {
                     widgetHeight(context: context, height: 58))
               ),
                 onPressed: (){
-                RegisterCubit.get(context).login(email.text, password.text);
+                RegisterCubit.get(context).login(email: email.text,password:password.text);
                 }, child: Center(
                 child: Text("Log in",
                 style: TextStyle(
@@ -159,7 +160,7 @@ class LoginPage extends StatelessWidget {
       else if(state is LoginFailure){
         Navigator.pop(context);
         showDialog(context: context, builder: (context) {
-          return errorMessage(text: "Email or password is wrong");
+          return const ErrorMessage(text: "Email or password is wrong");
         },);
       }
       else if(state is LoginSuccess){

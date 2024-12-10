@@ -1,22 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import '../../services/responsiveUi/responsive_height.dart';
 import '../../services/responsiveUi/responsive_width.dart';
 
+class ErrorMessage extends StatefulWidget {
+  const ErrorMessage({required this.text,super.key});
 
-
-class errorMessage extends StatefulWidget {
-   errorMessage({required this.text,super.key});
-
-  String text;
+  final String text;
 
   @override
-  State<errorMessage> createState() => _MessageState();
+  State<ErrorMessage> createState() => _MessageState();
 }
 
-class _MessageState extends State<errorMessage> with SingleTickerProviderStateMixin {
+class _MessageState extends State<ErrorMessage> with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<Offset> animation;
   @override
@@ -81,7 +78,6 @@ class _MessageState extends State<errorMessage> with SingleTickerProviderStateMi
                                   color: Colors.white
                               ),
                               child: Lottie.asset("assets/error.json",
-
                                 controller: controller,
                                 repeat: false,
                                 animate: true,
