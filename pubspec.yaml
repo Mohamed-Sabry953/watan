@@ -49,6 +49,10 @@ dependencies:
   flutter_svg: ^2.0.10+1
   image_picker: ^1.1.2
   pin_code_fields: ^8.0.1
+  animated_segmented_tab_control: ^2.0.0
+  flutter_animate: ^4.5.2
+  shimmer: ^3.0.0
+  simple_barcode_scanner: ^0.2.5
 
 flutter_launcher_icons:
   android: true

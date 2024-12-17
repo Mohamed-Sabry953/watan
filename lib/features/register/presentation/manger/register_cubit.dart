@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:final_project_2024/config/routes/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   static RegisterCubit get(context) => BlocProvider.of(context);
   bool checkBox = false;
   String verifictionEmail="";
+  int currentIndex=1;
   CrossFadeState registerCrossFadeState = CrossFadeState.showFirst;
 
   void checkBoxOperate() {
@@ -25,6 +27,10 @@ class RegisterCubit extends Cubit<RegisterState> {
   void changeFadeRegister() {
     registerCrossFadeState = CrossFadeState.showSecond;
     emit(ChangeFadeState());
+  }
+  void changeBottomNavIndex(int index) {
+    currentIndex = index;
+    emit(ChangeBottomNavIndexState());
   }
 
   void backFadeRegister() {
@@ -97,7 +103,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     );
 
   }
-  Future<void> verifyEmail({required String email,required String otp}) async {
+  Future<void> verifyEmail(BuildContext context,{required String email,required String otp}) async {
     emit(LoginLoading());
     var result = await registerRepo.verifyEmail(
       email: email,
@@ -108,6 +114,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         },
       (response) { emit(SentVerifyCodeSucState(response),
       );
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.homeLayout,(route) => false,);
         if (kDebugMode) {
           print(response);
         }
@@ -115,4 +122,63 @@ class RegisterCubit extends Cubit<RegisterState> {
     );
 
   }
+  Future<void> forgetPass(BuildContext context,{required String email}) async {
+    emit(LoginLoading());
+    var result = await registerRepo.forgetPass(
+      email: email,
+    );
+    result.fold(
+      (failure) { emit(SendForgetPassCodeFailState(failure.errMessage));
+        },
+      (response) { emit(SendForgetPassCodeSucState(response),
+      );
+      verifictionEmail=email;
+      Navigator.pushNamed(context, AppRoutesName.verifyOtpScreen);
+        if (kDebugMode) {
+          print(response);
+        }
+      }
+    );
+
+  }
+  Future<void> checkOtp(BuildContext context, {required String email,required String otp}) async {
+    emit(LoginLoading());
+    var result = await registerRepo.checkOtp(
+      email: email,
+      otp: otp
+    );
+    result.fold(
+      (failure) { emit(CheckOtpCodeFailState(failure.errMessage));
+        },
+      (response) { emit(CheckOtpCodeSucState(response),
+      );
+        Navigator.pushReplacementNamed(context, AppRoutesName.updatePassScreen);
+        if (kDebugMode) {
+          print(response);
+        }
+      }
+    );
+
+  }
+  Future<void> resetPass(BuildContext context,{required String email,required String pass,required passConfirm}) async {
+    emit(LoginLoading());
+    var result = await registerRepo.resetPass(
+      email: email,
+      pass: pass,
+      passConfirm: passConfirm
+    );
+    result.fold(
+      (failure) { emit(ResetPassFailState(failure.errMessage));
+        },
+      (response) { emit(ResetPassSucState(response),
+      );
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.registerScreen, (route) => false,);
+        if (kDebugMode) {
+          print(response);
+        }
+      }
+    );
+
+  }
+
 }

@@ -21,6 +21,12 @@ class RegisterApiService {
       "password":password,
       "password_confirmation":confirmPassword,
     },
+      options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "Accept":"application/json"
+          }
+      )
     );
     return response;
   }
@@ -32,6 +38,12 @@ class RegisterApiService {
     var response=await dio.post(
       ApiConstance.loginApiUrl,
       data: loginData,
+      options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "Accept":"application/json"
+          }
+      )
     );
     return response;
   }
@@ -52,6 +64,39 @@ class RegisterApiService {
     };
     var response=await dio.post(
       ApiConstance.verifyEmail,
+      data: verifyEmailData,
+    );
+    return response;
+  }
+  Future<Response> sendResetPassCode(String email) async {
+    Map<String, dynamic> otpData = {
+      "email": email,
+    };
+    var response=await dio.post(
+      ApiConstance.forgetPass,
+      data: otpData,
+    );
+    return response;
+  }
+  Future<Response> checkOtpAndEmail(String email,String otp) async {
+    Map<String, dynamic> verifyEmailData = {
+      "email": email,
+      "otp": otp,
+    };
+    var response=await dio.post(
+      ApiConstance.checkOtp,
+      data: verifyEmailData,
+    );
+    return response;
+  }
+  Future<Response> resetPass(String email,String pass,String passConfirm) async {
+    Map<String, dynamic> verifyEmailData = {
+      "email": email,
+      "password": pass,
+      "password_confirmation":passConfirm
+    };
+    var response=await dio.post(
+      ApiConstance.resetPass,
       data: verifyEmailData,
     );
     return response;

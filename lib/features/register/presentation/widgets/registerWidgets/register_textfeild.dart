@@ -24,9 +24,6 @@ class RegisterTextField extends StatelessWidget {
       height: widgetHeight(context: context, height: 60),
       child: TextFormField(
         controller: textEditingController,
-        maxLines: null,
-        minLines: null,
-        expands: true,
         obscureText: obscure,
         decoration: InputDecoration(
             hintStyle: TextStyle(

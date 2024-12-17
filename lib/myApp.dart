@@ -1,8 +1,9 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:final_project_2024/features/homeLayout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'config/routes/app_routes.dart';
-import 'features/servicesFeature/donate/presentation/ui/donatePage.dart';
+import 'features/servicesFeature/boycott/presentation/ui/resultPage.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +20,6 @@ class MyApp extends StatelessWidget {
           useInheritedMediaQuery: true,
           locale: DevicePreview.locale(context),
           builder: DevicePreview.appBuilder,
-          home:   DonateScreen(),
           onGenerateRoute: (settings) =>AppRoute.onGenerate(settings) ,
           debugShowCheckedModeBanner: false,
         );

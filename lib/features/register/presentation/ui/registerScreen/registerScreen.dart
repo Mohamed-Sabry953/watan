@@ -21,7 +21,6 @@ class RegisterScreen extends StatelessWidget {
             },
           child: SafeArea(
               child: Scaffold(
-                resizeToAvoidBottomInset: false,
             backgroundColor: const Color(0xffFFFFFF),
             body: SingleChildScrollView(
               child: AnimatedCrossFade(

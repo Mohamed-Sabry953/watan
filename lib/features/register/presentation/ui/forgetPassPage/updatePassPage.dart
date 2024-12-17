@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:final_project_2024/core/services/responsiveUi/responsive_height.dart';
 import 'package:final_project_2024/core/utils/constant/images.dart';
+import 'package:final_project_2024/features/register/presentation/manger/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,6 +15,8 @@ class UpdatePassPage extends StatelessWidget {
   UpdatePassPage({super.key});
   final StreamController<ErrorAnimationType> errorAnimationController=StreamController();
   final TextEditingController email=TextEditingController();
+  final TextEditingController pass=TextEditingController();
+  final TextEditingController passConfirm=TextEditingController();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -58,6 +61,7 @@ class UpdatePassPage extends StatelessWidget {
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 24)), // Code Input Field widget
                 TextFormField(
+                  controller: pass,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
@@ -80,6 +84,7 @@ class UpdatePassPage extends StatelessWidget {
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 24),),
                 TextFormField(
+                  controller: passConfirm,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
@@ -103,6 +108,7 @@ class UpdatePassPage extends StatelessWidget {
                 SizedBox(height: widgetHeight(context: context, height: 66),),
                 ElevatedButton(
                   onPressed: () {
+                    RegisterCubit.get(context).resetPass(context, email: RegisterCubit.get(context).verifictionEmail, pass: pass.text, passConfirm: passConfirm.text);
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(1000, widgetHeight(context: context, height: 60)),

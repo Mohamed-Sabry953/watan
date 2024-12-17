@@ -56,7 +56,7 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: widgetHeight(context: context, height: 32),
                   ),
-                  RegisterTextField(textEditingController: password,hintText: "******",),
+                  RegisterTextField(textEditingController: password,hintText: "******",obscure: true,),
                   SizedBox(
                     height: widgetHeight(context: context, height: 32),
                   ),
@@ -81,13 +81,18 @@ class LoginPage extends StatelessWidget {
                         color: Color(0xff535050).withOpacity(0.8)
                     ),),
                   const Spacer(),
-                  Text("Forget Password",
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        fontFamily: "Open Sans",
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xff96B23C)
-                    ),),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, AppRoutesName.forgetPass);
+                    },
+                    child: Text("Forget Password",
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          fontFamily: "Open Sans",
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xff96B23C)
+                      ),),
+                  ),
                 ],
               ),
             ),

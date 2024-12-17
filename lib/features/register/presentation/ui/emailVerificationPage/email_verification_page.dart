@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../../core/utils/constant/appColors.dart';
+import '../../manger/register_cubit.dart';
 import '../../widgets/emailVerificationWidgets/verification_button.dart';
 import '../../widgets/emailVerificationWidgets/verify_code.dart';
 
@@ -61,7 +62,9 @@ class EmailVerificationScreen extends StatelessWidget {
                   errorAnimationController: errorAnimationController,
                 ), // Code Input Field widget
                 SizedBox(height: widgetHeight(context: context, height: 60),),
-                 VerifyButton(pinCode: pinCode.text,), // Verify Button widget
+                 VerifyButton(pinCode: pinCode.text,function: (){
+                   RegisterCubit.get(context).verifyEmail(context,email: RegisterCubit.get(context).verifictionEmail, otp: pinCode.text);
+                 },), // Verify Button widget
                  SizedBox(height: 30.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

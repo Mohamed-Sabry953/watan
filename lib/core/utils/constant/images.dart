@@ -13,10 +13,15 @@ class Images{
   static const String watanIcon = "assets/projectImages/svg/Watan.svg";
   static const String forgetPassIcon = "assets/projectImages/svg/forgetPass.svg";
   static const String updatePassIcon = "assets/projectImages/svg/updatePass.svg";
+  static const String welcome = "assets/projectImages/svg/welcome.svg";
+  static const String onBoardingOne = "assets/projectImages/svg/onBoardingOne.svg";
+  static const String onBoardingTwo = "assets/projectImages/svg/onBoardingTwo.svg";
+  static const String notification = "assets/projectImages/svg/notification.svg";
 
 
   // Png images
   static const String boycott="assets/projectImages/appImages/boycott.jpg";
   static const String donate="assets/projectImages/appImages/donate.png";
   static const String mapService="assets/projectImages/appImages/mapService.png";
+  static const String donateBackground="assets/projectImages/appImages/donateBackground.png";
 }

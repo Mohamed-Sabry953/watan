@@ -113,4 +113,82 @@ class RegisterRepoImpl implements RegisterRepo {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, Response>> forgetPass({required String email}) async {
+    try{
+      Response response=await registerApiService.sendResetPassCode(email);
+      if(response.statusCode==200){
+        return Right(response);
+      }
+      else{
+        // print("Login failed: ${response.statusMessage}");
+        return Left(ServerFailure("Login fail${response.statusMessage}"));
+      }
+    }on DioError catch(e){
+      if (e.response != null) {
+        if (kDebugMode) {
+          print('Login error: ${e.response?.data}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      } else {
+        if (kDebugMode) {
+          print('Login error: ${e.message}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, Response>> checkOtp({required String email, required String otp}) async {
+    try{
+      Response response=await registerApiService.checkOtpAndEmail(email, otp);
+      if(response.statusCode==200){
+        return Right(response);
+      }
+      else{
+        // print("Login failed: ${response.statusMessage}");
+        return Left(ServerFailure("Login fail${response.statusMessage}"));
+      }
+    }on DioError catch(e){
+      if (e.response != null) {
+        if (kDebugMode) {
+          print('Login error: ${e.response?.data}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      } else {
+        if (kDebugMode) {
+          print('Login error: ${e.message}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, Response>> resetPass({required String email, required String pass,required passConfirm}) async {
+    try{
+      Response response=await registerApiService.resetPass(email, pass,passConfirm);
+      if(response.statusCode==200){
+        return Right(response);
+      }
+      else{
+        // print("Login failed: ${response.statusMessage}");
+        return Left(ServerFailure("Login fail${response.statusMessage}"));
+      }
+    }on DioError catch(e){
+      if (e.response != null) {
+        if (kDebugMode) {
+          print('Login error: ${e.response?.data}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      } else {
+        if (kDebugMode) {
+          print('Login error: ${e.message}');
+        }
+        return Left(ServerFailure.fromDioError(e));
+      }
+    }
+  }
 }

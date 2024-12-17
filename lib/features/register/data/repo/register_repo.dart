@@ -14,4 +14,7 @@ abstract class RegisterRepo{
       );
   Future<Either<Failure,Response>>sendVerifyCode({required String email});
   Future<Either<Failure,Response>>verifyEmail({required String email,required String otp});
+  Future<Either<Failure,Response>>forgetPass({required String email});
+  Future<Either<Failure,Response>>checkOtp({required String email,required String otp});
+  Future<Either<Failure,Response>>resetPass({required String email,required String pass,required passConfirm});
 }

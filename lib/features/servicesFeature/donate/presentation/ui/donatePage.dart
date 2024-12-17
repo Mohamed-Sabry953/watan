@@ -1,5 +1,10 @@
 import 'package:final_project_2024/core/services/responsiveUi/responsive_height.dart';
+import 'package:final_project_2024/core/services/responsiveUi/responsive_width.dart';
+import 'package:final_project_2024/core/utils/constant/images.dart';
+import 'package:final_project_2024/features/servicesFeature/donate/data/donate_list_items.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DonateScreen extends StatelessWidget {
   const DonateScreen({super.key});
@@ -10,61 +15,44 @@ class DonateScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        flexibleSpace: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.black),
-                  onPressed: () {
-                    // Handle back button
-                  },
-                ),
-                const Text(
-                  "Donate",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.black),
-                  onPressed: () {
-                    // Handle menu button
-                  },
-                ),
-              ],
-            ),
-          ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(image: AssetImage(Images.donateBackground),fit: BoxFit.cover)
         ),
-      ),
-      body: Column(
-        children: [
-          const SizedBox(height: 16),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: 4, // Replace with dynamic data length
-              itemBuilder: (context, index) {
-                return DonationCard(
-                  imageUrl: "https://s3-alpha-sig.figma.com/img/7686/7dfe/28da0cea8c38be96e196e1896201637f?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=L5VSQJHscRukDIn-eU4H9sDa5YL9VHm00rhEKQHgDAbUbTOI0ZoC1TaGkq3dAMDNs1aat8Rc8CBud7JYWH5I1GtqtvXolo9NkHK~Rso80xDwyN4Yb6Wiw2ToEMkIAJvKRmpXRMXnqERNPx6YGa3MAx5bo73YU2RWznyXR57Ci8dxYXsgGoVGzn4M7X6rsjyTLLRq65eqiZO73Y-qxNi2XvGX-uSUowbXV75w~SUs3H289-383oEQ4mtpPaOiyUvW~idkGO2v8XwqPB8ujMM2~EcLnolpHz5Tu6Zk982fRHeaMLIourJNYyFTLM1BHE-NXk6ao-FdXuvaM~I~2hUdlw__", // Replace with actual image URL
-                  title: index % 2 == 0
-                      ? "Resala Charity Organization"
-                      : "Orman Association",
-                  description:
-                  "Together, we can change the world. Your call to give brings hope...",
-                );
-              },
+        child: Column(
+          children: [
+              SizedBox(height: widgetHeight(context: context, height: 30)),
+            Padding(
+              padding: REdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                SvgPicture.asset(Images.backArrowIos,width: widgetWidth(context: context, width: 13),),
+                Text("donate",style: TextStyle(
+                  fontSize: 23.sp,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600
+                ),),
+                Icon(Icons.menu,size: 24.sp,)
+              ],),
             ),
-          ),
-        ],
+             SizedBox(height: widgetHeight(context: context, height: 60)),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: 6, // Replace with dynamic data length
+                itemBuilder: (context, index) {
+                  return DonationCard(
+                    imageUrl: DonateListItems.items[index].image,
+                    title: DonateListItems.items[index].title,
+                    description:DonateListItems.items[index].mainContent
+                    ,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -85,15 +73,16 @@ class DonationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widgetHeight(context: context, height: 140),
+      height: widgetHeight(context: context, height: 160),
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
+        border: Border.all(color: Colors.black.withOpacity(0.1)),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.black87.withOpacity(0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -105,27 +94,27 @@ class DonationCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             child: Image.network(
               imageUrl,
-              height: 80,
-              width: 80,
+              height: 120,
+              width: 110,
               fit: BoxFit.cover,
             ),
           ),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8),
+                 SizedBox(height: widgetHeight(context: context, height: 16)),
                 Text(
                   description,
-                  maxLines: 2,
+                  maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),

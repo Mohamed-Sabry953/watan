@@ -1,4 +1,5 @@
 
+import 'package:final_project_2024/config/routes/app_routes.dart';
 import 'package:final_project_2024/core/utils/constant/appColors.dart';
 import 'package:final_project_2024/core/utils/constant/images.dart';
 import 'package:final_project_2024/features/servicesFeature/service_page_widgets/service_item_widget.dart';
@@ -87,10 +88,20 @@ class ServicesPage extends StatelessWidget {
                               crossAxisSpacing: 10,
                               crossAxisCount: 2),
                           itemBuilder: (context, index) {
-                            return ServiceItemWidget(
-                              describetion: describtion[index],
-                              iconImage: iconImages[index],
-                              serviceImage: serviceImages[index],
+                            return InkWell(
+                              onTap: () {
+                                if(index==0){
+                                Navigator.pushNamed(context, AppRoutesName.boycottpage);
+                                }
+                                else if(index==1){
+                                  Navigator.pushNamed(context, AppRoutesName.donateScreen);
+                                }
+                              },
+                              child: ServiceItemWidget(
+                                describetion: describtion[index],
+                                iconImage: iconImages[index],
+                                serviceImage: serviceImages[index],
+                              ),
                             );
                           },),
                     ),

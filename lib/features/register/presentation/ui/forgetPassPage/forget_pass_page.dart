@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../../core/utils/constant/appColors.dart';
+import '../../manger/register_cubit.dart';
 import '../../widgets/emailVerificationWidgets/verification_button.dart';
 import '../../widgets/emailVerificationWidgets/verify_code.dart';
 import '../../widgets/registerWidgets/register_textfeild.dart';
@@ -22,7 +23,6 @@ class ForgetPassScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 100.h,
@@ -64,7 +64,9 @@ class ForgetPassScreen extends StatelessWidget {
 
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 60),),
-                 const VerifyButton(pinCode: "",), // Verify Button widget
+                  VerifyButton(pinCode: "",function: (){
+                    RegisterCubit.get(context).forgetPass(context, email: email.text);
+                 },), // Verify Button widget
                  SizedBox(height: 30.h),
               ],
             ),
