@@ -2,6 +2,7 @@ import 'package:final_project_2024/core/services/responsiveUi/responsive_height.
 import 'package:final_project_2024/core/utils/constant/generic_variables.dart';
 import 'package:final_project_2024/core/utils/constant/images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({super.key});
@@ -44,6 +45,7 @@ class ResultsScreen extends StatelessWidget {
                       elevation: 5,
                       color: const Color(0XFFFDFDFD),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.network(GenericVariables.data?.alternatives?[index].productImage??"",
                           height: widgetHeight(context: context, height: 80),
@@ -57,14 +59,20 @@ class ResultsScreen extends StatelessWidget {
                             );
                           },
                           ),
+                          SizedBox(height: widgetHeight(context: context, height: 10),),
                           Text(GenericVariables.data?.alternatives?[index].productName??"",style: TextStyle(
                               fontSize: 18,
                               color: Color(0XFF000000),
                               fontWeight: FontWeight.w700
                           ),),
-                          Text(GenericVariables.data?.alternatives?[index].productPrice??"",style: TextStyle(
+                          SizedBox(height: widgetHeight(context: context, height: 5),),
+
+                          Text(
+                                  "${
+                                        GenericVariables.data?.alternatives?[index].productPrice
+                                      } l.e" ??"",style: TextStyle(
                               color: Color(0XFF000000),
-                              fontSize: 10,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w600
                           ),),
 
@@ -130,7 +138,7 @@ class ImageSection extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.network(
-          'https://images.unsplash.com/photo-1551782450-a2132b4ba21d', // Replace with your own URL
+          GenericVariables.alternativeMsg!=null?"https://s3-alpha-sig.figma.com/img/987c/3616/63fe837e07cf64adbd8a602d0969fe05?Expires=1735516800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dF50DAWyhI8BgWpGCExtRiOEs-eBKWvvCCSNSdS2-H8MPCHydmJ4RZjN86rJEIQILmOhjoFHXPnu9bAXAfNzWGibc1gZOpD8FvweO27e8MMcDfGrIgxDFZjXFaXVyScJIl0mFge~dslcJr-yyZrvySpgZ~kICUVyOvQM5UybdBSkwLthEacVPA1n~n27gAp9k4HctAR6ube5xJzIxoCntMUU~DzQa5Rrir1s2pPtsMdEgddT7Gp1ds5Da7axIEETqcFpFGbek9K2MUdjfrSGFuMdJbybx3O2VOsEHtSLc55KUPtNSTWW9aXZ6lUC22dObzpoTHagygqHpARNPTSOrg__":GenericVariables.data?.categoryPhoto??"", // Replace with your own URL
           height: 200,
           width: MediaQuery.of(context).size.width * 0.9,
           fit: BoxFit.cover,
@@ -151,8 +159,8 @@ class DescriptionSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Wajdaa Restaurant is',
+           Text(
+            GenericVariables.data?.categoryDesc??"",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,

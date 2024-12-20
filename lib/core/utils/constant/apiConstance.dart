@@ -1,6 +1,6 @@
 class ApiConstance{
-  static const String baseUrl = 'https://1ebb-197-54-216-50.ngrok-free.app';
-  static const String chatBotBaseUrl = 'https://f81d-197-54-216-50.ngrok-free.app';
+  static const String baseUrl = 'https://8053-105-33-13-96.ngrok-free.app';
+  static const String chatBotBaseUrl = 'https://895b-196-136-10-79.ngrok-free.app';
 //=============================auth=========================================
   static const String registerApiUrl = '$baseUrl/api/register';
   static const String loginApiUrl = '$baseUrl/api/login';
