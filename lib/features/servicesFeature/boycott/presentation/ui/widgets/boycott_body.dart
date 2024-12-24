@@ -79,7 +79,7 @@ class Boycottpage_Body extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Boycott_Card(index: index,),
+              child: BoycottCard(index: index,),
             );
           },
         ),

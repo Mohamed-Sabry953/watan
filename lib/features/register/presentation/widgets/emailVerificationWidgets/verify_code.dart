@@ -11,6 +11,7 @@ import '../../../../../core/services/responsiveUi/responsive_width.dart';
 class PinCodeItem extends StatelessWidget {
   const PinCodeItem({
     super.key,
+    this.validator,
     required this.length,
     required this.onChanged,
     required this.errorAnimationController,
@@ -21,17 +22,13 @@ class PinCodeItem extends StatelessWidget {
   final void Function(String) onChanged;
   final StreamController<ErrorAnimationType> errorAnimationController;
   final TextEditingController pinCode;
-
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: REdgeInsets.only(right: 5,left: 5),
       child: PinCodeTextField(
-        validator: (value) {
-
-
-
-        },
+        validator: validator,
         controller: pinCode,
         hintCharacter: "-",
         hintStyle: TextStyle(

@@ -20,88 +20,109 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit,RegisterState>(
       builder: (context, state) {
-        return  SingleChildScrollView(
-          child: Form(
-            key: formkey,
-            child: Container(
-              margin: REdgeInsetsDirectional.only(top: 30),
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage("assets/projectImages/register/signupImage.png"),
-                    width: widgetWidth(
-                      context: context,
-                      width: 250,
-                    ),
-                    height: widgetHeight(context: context, height: 114),
-                  ),
-                  SizedBox(
-                    height: widgetHeight(context: context, height: 32),
-                  ),
-                  Padding(
-                    padding: REdgeInsets.only(right: 27, left: 27),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Sign Up page",
-                          style: TextStyle(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "Open Sans"),
-                        ),
-                        SizedBox(
-                          height: widgetHeight(context: context, height: 32),
-                        ),
-                        RegisterTextField(textEditingController: name,
-                          hintText: "Enter full name",
-                        ),
-                        SizedBox(
-                          height: widgetHeight(context: context, height: 32),
-                        ),
-                        RegisterTextField(textEditingController: email,
-                          hintText: "Enter Email",
-                        ),
-                        SizedBox(
-                          height: widgetHeight(context: context, height: 32),
-                        ),
-                        RegisterTextField(
-                          textEditingController: password,hintText: "******",
-                        ),
-                        SizedBox(
-                          height: widgetHeight(context: context, height: 32),
-                        ),                    RegisterTextField(
-                          textEditingController: confirmPassword,hintText: "******",
-                        ),
-                        SizedBox(
-                          height: widgetHeight(context: context, height: 32),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: widgetHeight(context: context, height: 30),
-                  ),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff628D3D),
-                          fixedSize: Size(widgetWidth(context: context, width: 140),
-                              widgetHeight(context: context, height: 58))
+        return  Scaffold(
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: Form(
+              key: formkey,
+              child: Container(
+                margin: REdgeInsetsDirectional.only(top: 30),
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: widgetHeight(context: context, height: 35),),
+                    Image(
+                      image: AssetImage("assets/projectImages/register/signupImage.png"),
+                      width: widgetWidth(
+                        context: context,
+                        width: 250,
                       ),
-                      onPressed: (){
-                        RegisterCubit.get(context).postSignup(name:name.text,email:email.text,password: password.text,confirmPassword: confirmPassword.text);
-                      }, child: Center(
-                      child: Text("Sign up",
-                        style: TextStyle(
-                            fontSize: 18.sp,
-                            fontFamily: "Open Sans",
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white
+                      height: widgetHeight(context: context, height: 114),
+                    ),
+                    SizedBox(
+                      height: widgetHeight(context: context, height: 32),
+                    ),
+                    Padding(
+                      padding: REdgeInsets.only(right: 27, left: 27),
+                      child: Column(
+                        children: [
+                          Text(
+                            "Sign Up page",
+                            style: TextStyle(
+                                fontSize: 25.sp,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Open Sans"),
+                          ),
+                          SizedBox(
+                            height: widgetHeight(context: context, height: 32),
+                          ),
+                          RegisterTextField(textEditingController: name,
+                            suffixIcon: false,
+                            hintText: "Enter full name",
+                            validator: RegisterCubit.get(context).validateName,
+                            formState: formkey.currentState?.validate() ?? true,
+                          ),
+                          SizedBox(
+                            height: widgetHeight(context: context, height: 32),
+                          ),
+                          RegisterTextField(textEditingController: email,
+                            suffixIcon: false,
+                            hintText: "Enter Email",
+                            validator: RegisterCubit.get(context).validateEmail,
+                            formState: formkey.currentState?.validate() ?? true,
+                          ),
+                          SizedBox(
+                            height: widgetHeight(context: context, height: 32),
+                          ),
+                          RegisterTextField(
+                            textEditingController: password,hintText: "******",
+                            obscure: true,
+                            suffixIcon: true,
+                            validator: RegisterCubit.get(context).validateStrongPassword,
+                            onChanged: (p0) {
+                              RegisterCubit.get(context).passConfirm=password.text;
+                            },
+                            formState: formkey.currentState?.validate() ?? true,
+                          ),
+                          SizedBox(
+                            height: widgetHeight(context: context, height: 32),
+                          ),                    RegisterTextField(
+                            textEditingController: confirmPassword,hintText: "******",
+                            obscure: true,
+                            suffixIcon: true,
+                            validator: RegisterCubit.get(context).validatePasswordConfirmation,
+                            formState: formkey.currentState?.validate() ?? true,
+                          ),
+                          SizedBox(
+                            height: widgetHeight(context: context, height: 32),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: widgetHeight(context: context, height: 30),
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff628D3D),
+                            fixedSize: Size(widgetWidth(context: context, width: 140),
+                                widgetHeight(context: context, height: 58))
                         ),
-                      ))),
-                ],
+                        onPressed: (){
+                          RegisterCubit.get(context).postSignup(name:name.text,email:email.text,password: password.text,confirmPassword: confirmPassword.text);
+                        }, child: Center(
+                        child: Text("Sign up",
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontFamily: "Open Sans",
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white
+                          ),
+                        ))),
+                  ],
+                ),
               ),
             ),
           ),
@@ -122,8 +143,8 @@ class SignupPage extends StatelessWidget {
         },);
       }
          else if(state is SignupSuccess){
-          Navigator.pop(context);
-          Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.emailVerification, (route) => false,);
+           Navigator.pop(context);
+          Navigator.pushNamed(context, AppRoutesName.emailVerification);
          }
     },
     );

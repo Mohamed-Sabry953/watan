@@ -1,4 +1,4 @@
-import 'package:final_project_2024/features/home/presentation/manger/home_cubit.dart';
+import 'package:final_project_2024/features/home/presentation/manger/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +18,7 @@ class UserInfoRow extends StatelessWidget {
         ),
          SizedBox(width: 8.w),
         Text(
-          'Johan smith',
+          HomeCubit.get(context).homeRepoImp.latestPosts?.data?[index].user!.name??'Johan smith',
           style: TextStyle(
             fontSize: 15.sp,
             fontWeight: FontWeight.w500,

@@ -12,79 +12,107 @@ class EmailVerificationScreen extends StatelessWidget {
    EmailVerificationScreen({super.key});
   final StreamController<ErrorAnimationType> errorAnimationController=StreamController();
   final TextEditingController pinCode=TextEditingController();
+   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          toolbarHeight: 100.h,
-          title:  Text(
-            "Email Verification",
-            style: TextStyle(fontSize: 21.sp, fontWeight: FontWeight.w500),
+    return Form(
+      key: formKey,
+      child: SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            toolbarHeight: 100.h,
+            title:  Text(
+              "Email Verification",
+              style: TextStyle(fontSize: 21.sp, fontWeight: FontWeight.w500),
+            ),
+            centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
           ),
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                 SizedBox(height: 55.h),
-                 Text(
-                  "Get Your Code",
-                  style: TextStyle(fontSize: 20.sp, color: AppColors.primary, fontWeight: FontWeight.bold),
-                ),
-                 SizedBox(height: 25.h),
-                 Text(
-                  "Please enter the 6 digit code that was sent to your email address",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 13.sp, color: Colors.black87),
-                ),
-                 SizedBox(height: widgetHeight(context: context, height: 50)),
-                 PinCodeItem(
-                  pinCode: pinCode,
-                  length: 6,
-                  onChanged: (p0) {
-                  },
-                  errorAnimationController: errorAnimationController,
-                ), // Code Input Field widget
-                SizedBox(height: widgetHeight(context: context, height: 60),),
-                 VerifyButton(pinCode: pinCode.text,function: (){
-                   RegisterCubit.get(context).verifyEmail(context,email: RegisterCubit.get(context).verifictionEmail, otp: pinCode.text);
-                 },), // Verify Button widget
-                 SizedBox(height: 30.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "If you don't receive the code! ",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // Resend code logic
-                      },
-                      child: const Text(
-                        "Resend",
-                        style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                   SizedBox(height: 55.h),
+                   Text(
+                    "Get Your Code",
+                    style: TextStyle(fontSize: 20.sp, color: AppColors.primary, fontWeight: FontWeight.bold),
+                  ),
+                   SizedBox(height: 25.h),
+                   Text(
+                    "Please enter the 6 digit code that was sent to your email address",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 13.sp, color: Colors.black87),
+                  ),
+                   SizedBox(height: widgetHeight(context: context, height: 50)),
+                   PinCodeItem(
+                    pinCode: pinCode,
+                    validator: (value)
+                    {
+                      if (value == null || value.isEmpty) {
+                        return '';
+                      }
+
+                      // Check if the input is 6 digits
+                      if (!RegExp(r'^\d{6}$').hasMatch(value)) {
+                        return '';
+                      }
+
+                      return null; // Valid PIN code
+                    },
+                    length: 6,
+                    onChanged: (p0) {
+                    },
+
+                    errorAnimationController: errorAnimationController,
+                  ), // Code Input Field widget
+                  SizedBox(height: widgetHeight(context: context, height: 60),),
+                   VerifyButton(pinCode: pinCode.text,function: (){
+                     if (formKey.currentState?.validate() ?? false) {
+                       // Form is valid, proceed with further logic
+                     RegisterCubit.get(context).verifyEmail(context,email: RegisterCubit.get(context).verifictionEmail, otp: pinCode.text);
+                     }
+                     else{
+                       ScaffoldMessenger.of(context).showSnackBar(
+                         SnackBar(
+                             backgroundColor: Colors.redAccent,
+                             content: Text('Enter vaild verify code!')),
+                       );
+                     }
+                   },), // Verify Button widget
+                   SizedBox(height: 30.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "If you don't receive the code! ",
+                        style: TextStyle(color: Colors.grey),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      GestureDetector(
+                        onTap: () {
+                          // Resend code logic
+                        },
+                        child: const Text(
+                          "Resend",
+                          style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

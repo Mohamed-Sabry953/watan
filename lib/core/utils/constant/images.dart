@@ -17,11 +17,18 @@ class Images{
   static const String onBoardingOne = "assets/projectImages/svg/onBoardingOne.svg";
   static const String onBoardingTwo = "assets/projectImages/svg/onBoardingTwo.svg";
   static const String notification = "assets/projectImages/svg/notification.svg";
+  static const String pickImage = "assets/projectImages/svg/pickImage.svg";
 
 
   // Png images
   static const String boycott="assets/projectImages/appImages/boycott.jpg";
   static const String donate="assets/projectImages/appImages/donate.png";
+  static const String chatBackground="assets/projectImages/appImages/chatBackground.png";
   static const String mapService="assets/projectImages/appImages/mapService.png";
   static const String donateBackground="assets/projectImages/appImages/donateBackground.png";
+
+  // lottie assets
+  static const String chat="assets/projectImages/json/chat.json";
+  static const String emptyChat="assets/projectImages/json/emptyChat.json";
+
 }

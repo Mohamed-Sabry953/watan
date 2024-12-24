@@ -3,15 +3,15 @@ import 'package:final_project_2024/core/utils/constant/generic_variables.dart';
 import 'package:final_project_2024/features/servicesFeature/boycott/data/models/AlternativeModel.dart';
 import 'package:final_project_2024/features/servicesFeature/boycott/data/models/BoycottModel.dart';
 import 'package:final_project_2024/features/servicesFeature/boycott/data/repository/boycott_repo_imp.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 part 'boycott_state.dart';
 
 class BoycottCubit extends Cubit<BoycottState> {
   BoycottCubit(this.boycottRepoImp) : super(BoycottInitial());
   final BoycottRepoImp boycottRepoImp;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   static BoycottCubit get(context)=>BlocProvider.of(context);
 
   Future<void> getProducts() async {

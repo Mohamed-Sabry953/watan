@@ -54,6 +54,19 @@ class VerifyOtpScreen extends StatelessWidget {
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 50)),
                 PinCodeItem(
+                  validator: (value)
+                  {
+                    if (value == null || value.isEmpty) {
+                      return '';
+                    }
+
+                    // Check if the input is 6 digits
+                    if (!RegExp(r'^\d{6}$').hasMatch(value)) {
+                      return '';
+                    }
+
+                    return null; // Valid PIN code
+                  },
                   pinCode: pinCode,
                   length: 6,
                   onChanged: (p0) {

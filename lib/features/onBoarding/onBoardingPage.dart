@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../core/cache/cachData.dart';
+
 class Onboardingpage extends StatefulWidget {
   const Onboardingpage({super.key});
 
@@ -38,7 +40,8 @@ class _OnboardingpageState extends State<Onboardingpage> with SingleTickerProvid
   }
   void navigate(){
     Future.delayed(Duration(seconds: 5),() {
-      Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.registerScreen, (route) => false,);
+      CacheData.getUserToken(key: "user_token")==null?Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.loginScreen, (route) => false,):
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.homeLayout, (route) => false,);
     },);
   }
   @override

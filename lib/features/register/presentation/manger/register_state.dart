@@ -5,7 +5,8 @@ sealed class RegisterState {}
 
 final class RegisterInitial extends RegisterState {}
 final class ChangeCheckBoxState extends RegisterState {}
-final class ChangeFadeState extends RegisterState {}
+final class ChangeLangState extends RegisterState {}
+final class ChangeDrawerItemIndex extends RegisterState {}
 final class ChangeBottomNavIndexState extends RegisterState {}
 final class BackFadeState extends RegisterState {}
 final class SignupLoading extends RegisterState {}
@@ -67,3 +68,14 @@ final class ResetPassFailState extends RegisterState {
 
 
 }
+final class GetProfileSucState extends RegisterState {
+  final UserModel userModel;
+  GetProfileSucState(this.userModel);
+}
+final class GetProfileFailState extends RegisterState {
+  final String errMessage;
+  GetProfileFailState(this.errMessage);
+
+
+}
+final class GetProfileLoadingState extends RegisterState {}

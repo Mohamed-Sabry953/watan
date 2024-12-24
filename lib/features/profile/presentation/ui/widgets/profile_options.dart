@@ -16,42 +16,50 @@ class ProfileOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:  REdgeInsets.symmetric(vertical: 12, horizontal: 16.0),
-      padding: REdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16.0),
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: const Offset(0, 8)
-          )
+        color: Colors.white,
+        boxShadow:[
+          BoxShadow(color: Colors.black.withOpacity(0.12),
+            offset: Offset(3, 3),
+            blurRadius: 3,
+          ),
+          BoxShadow(color: Colors.black.withOpacity(0.08),
+            offset: Offset(-3, -3),
+            blurRadius: 3,
+          ),
         ],
-        color: const Color(0xffF3F2F2),
-        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.black.withOpacity(0.05)),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: Row(
         children: [
-          Icon(icon, size: 24.sp),
-           SizedBox(width: 13.w),
+          Icon(icon, size: 24),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style:  TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                    fontFamily: "Playpen Sans",
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   value,
-                  style:  TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500,color: Colors.grey,),
+                  style: const TextStyle(
+                      fontFamily: "Playpen Sans",
+                      fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
           ),
-           Icon(Icons.arrow_forward_ios, size: 16.sp),
+          const Icon(Icons.arrow_forward_ios, size: 16),
         ],
       ),
     );

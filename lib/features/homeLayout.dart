@@ -11,23 +11,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../core/utils/constant/appColors.dart';
+import '../core/utils/widgets/drawer.dart';
 
-class HomeLayout extends StatefulWidget {
+class HomeLayout extends StatelessWidget {
    HomeLayout({super.key});
 
-  @override
-  State<HomeLayout> createState() => _HomeLayoutState();
-}
-
-class _HomeLayoutState extends State<HomeLayout> {
-  List<Widget>pages=[ServicesPage(),const HomeScreen(),const ChatScreen()];
-
-
+   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+  List<Widget>pages=[ServicesPage(), HomeScreen(scaffoldKey),const ChatScreen()];
     return BlocBuilder<RegisterCubit,RegisterState>(builder: (context, state) {
       return Scaffold(
-
+        key:scaffoldKey,
+        drawer: CustomDarwer(),
         bottomNavigationBar: RegisterCubit.get(context).currentIndex==2?null:CurvedNavigationBar(
           height: 75.h,
           index:1,

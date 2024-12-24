@@ -15,15 +15,11 @@ class ChatbotCubit extends Cubit<ChatbotState> {
   final ChatBotRepoImp chatBotRepoImp;
   final TextEditingController controller = TextEditingController();
   final List<Map<String, dynamic>> messages = [];
-  final ScrollController scrollController = ScrollController();
 
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      scrollToBottom();
-    });
-  }
 
-  void sendMessage() {
+
+
+  void sendMessage(Function func) {
     if (controller.text.isNotEmpty) {
         messages.insert(0, {
           'text': controller.text,
@@ -32,17 +28,11 @@ class ChatbotCubit extends Cubit<ChatbotState> {
         });
         emit(ChatbotSendState());
         controller.clear();
-      scrollToBottom();
+      func();
     }
   }
 
-  void scrollToBottom() {
-    scrollController.animateTo(
-      0.0,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
-    );
-  }
+
 
   Future<void> pickImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -54,7 +44,7 @@ class ChatbotCubit extends Cubit<ChatbotState> {
           'isMe': true,
           'isImage': true,
         });
-      scrollToBottom();
+
     }
   }
   Future<void> chatBot() async {

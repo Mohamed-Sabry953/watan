@@ -36,7 +36,7 @@ class ChatBotRepoImp implements ChatBotRepo{
         if (kDebugMode) {
           print('Login error: ${e.message}');
         }
-        return Left(ServerFailure(e.message!));
+        return Left(ServerFailure(e.message??""));
       }
     }
   }

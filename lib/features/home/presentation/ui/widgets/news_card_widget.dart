@@ -1,4 +1,4 @@
-import 'package:final_project_2024/features/home/presentation/manger/home_cubit.dart';
+import 'package:final_project_2024/features/home/presentation/manger/cubit/home_cubit.dart';
 import 'package:final_project_2024/features/home/presentation/ui/widgets/user_info_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +16,7 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (homeState is HomeLoadingState) {
+    if (homeState is HomeLoadingState || HomeCubit.get(context).homeRepoImp.latestPosts==null) {
       return Container(
         margin: REdgeInsetsDirectional.only(bottom: 5),
         decoration: BoxDecoration(
@@ -130,11 +130,10 @@ class NewsCard extends StatelessWidget {
               ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(12)),
-                child: SizedBox(
+                child: HomeCubit.get(context).homeRepoImp.latestPosts!.data![index].media!.isEmpty?SizedBox(height: 100.h,):SizedBox(
                   height: 160.h,
                   width: double.infinity,
-                  child: Image.network(HomeCubit.get(context).homeRepoImp.latestPosts?.data?[index].media?[0]??
-                    "https://s3-alpha-sig.figma.com/img/368f/2f47/7547bc4434de5b251d919712957a7e65?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=dqCFG35iR1LUefWnJCRXVWdZ6DlWyr4LzlRh~IDoVyNRxo43RKIGDmNGCbRZV1bFl~FAGidFgVmgrndD1L1YztNX8u3BzlkzzoDp~2O9BAmu4MtJ5sNNNN25v8pJFkjAuUll6p~QRB4IzDcpoLYKjt7XICSa37xyIgjqL6IC3bZeGteMg2xHnMI2TECJmAmlP8s0NYK1BvCTQisKt~S0aV-b0HKgx0vr1ujQ8Gn2Dbcaj21dYwmcPBSZH8nZT8z1GV4gl9xj3tnh4us6DpiDVBGButrdNAjbd3DwgATd0k0LPYutPWrqJ-RRAcB7PE0FXi1n0cW0WegH~iK-MpzS4Q__",
+                  child: Image.network(HomeCubit.get(context).homeRepoImp.latestPosts?.data?[index].media?[0]??"",
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(

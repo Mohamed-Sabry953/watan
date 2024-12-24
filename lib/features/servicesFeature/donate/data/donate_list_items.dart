@@ -6,7 +6,7 @@ class DonateListItems{
         mainContent: "It was established in 2008 in Egypt. It is a non-profit organization that aims to provide high-quality medical care for heart patients, <br /> <br /> train medical personnel, and conduct advanced research in the field of heart diseases. The foundation's heart center is located in Aswan",
         image: "https://s3-alpha-sig.figma.com/img/7686/7dfe/28da0cea8c38be96e196e1896201637f?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=laWDzhlXe3ktl3o8g0y7FiUPJ3Cdjouf-G3-SsSnKjwSj7X65glw4hDRj5akJGHBi3WWjG9ShFXUxoB6XLVcA3hgQEdNIAn0r4mevtwWAAUcLSg0~usgCP1ZeSWli2Vd5ar7rcbU4e8ifMB5ZdOwy~WUHHKoVV2mu4El3ujC9DZ5DFkONAfqyXXez16rRxT-YMVg8pSZTYf54EOO8MIy932EbBGmGzpBaQt2v8eADq1BdXhLWRTypUeAab7jQCwUdkYse1ZNU9ze4ERlgtrcAj-o8wp97O3NYsmIf7U1H7Hp~~IcqIyQbGPtm-qXjQb44oZcc3l7or86udPBFMhVDg__",
         address: "Aswan International Airport Road, Aswan, Egypt.",
-        link: "https://www.myf-egypt.org/ar/",
+        link: "https://www.myf-egypt.org/app_ar.arb/",
         phoneNumber: "Hotline: 19731 (within Egypt)",
         details: "Since its inception, the Foundation has performed more than 50,000 surgeries.Provides more than 12,000 free medical consultations annually.Contributed to saving the lives of thousands of patients"),
     DonateDataModel(

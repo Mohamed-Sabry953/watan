@@ -1,11 +1,13 @@
 // main.dart
 import 'package:final_project_2024/core/utils/constant/images.dart';
+import 'package:final_project_2024/core/utils/widgets/drawer.dart';
 import 'package:final_project_2024/features/home/data/repository/home_repo_imp.dart';
-import 'package:final_project_2024/features/home/presentation/manger/home_cubit.dart';
+import 'package:final_project_2024/features/home/presentation/manger/cubit/home_cubit.dart';
 import 'package:final_project_2024/features/home/presentation/ui/widgets/app_bar_widget.dart';
 import 'package:final_project_2024/features/home/presentation/ui/widgets/news_card_widget.dart';
 import 'package:final_project_2024/features/home/presentation/ui/widgets/post_widget.dart';
 import 'package:final_project_2024/features/home/presentation/ui/widgets/share_posts_card.dart';
+import 'package:final_project_2024/features/register/presentation/manger/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,9 +17,19 @@ import '../../../../core/utils/service locator/service_locator.dart';
 
 
 // screens/home_screen.dart
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+   HomeScreen(this.scaffoldKey,{super.key});
+  GlobalKey<ScaffoldState> scaffoldKey;
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    RegisterCubit.get(context).getProfile(context);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) => HomeCubit(sl<HomeRepoImp>())..getPosts()..getLatestPosts(),
@@ -27,10 +39,10 @@ class HomeScreen extends StatelessWidget {
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
-              const SliverAppBar(
+               SliverAppBar(
                 backgroundColor: Colors.white,
                 floating: true,
-                title: AppHeader(),
+                title: AppHeader(widget.scaffoldKey),
               ),
               SliverToBoxAdapter(
                 child: Padding(
@@ -62,9 +74,16 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      PostWidget(index: 0, homeState: state,)
                     ],
                   ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                    return PostWidget(index: index, homeState: state,);
+                  },
+                  childCount: HomeCubit.get(context).homeRepoImp.postsModel?.data?.length,
                 ),
               ),
             ],

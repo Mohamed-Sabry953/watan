@@ -1,0 +1,26 @@
+{
+  "language": "Language",
+  "home": "Home",
+  "services": "Services",
+  "privacy": "Privacy policy",
+  "chat": "Chat",
+  "logout": "Logout",
+  "@language": {
+    "description": "Label for selecting a language."
+  },
+  "@home": {
+    "description": "Label for the home screen."
+  },
+  "@services": {
+    "description": "Label for the services section."
+  },
+  "@privacy": {
+    "description": "Label for the privacy policy section."
+  },
+  "@chat": {
+    "description": "Label for the chat section."
+  },
+  "@logout": {
+    "description": "Label for the logout button."
+  }
+}

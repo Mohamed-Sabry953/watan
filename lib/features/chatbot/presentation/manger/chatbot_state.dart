@@ -4,6 +4,7 @@ part of 'chatbot_cubit.dart';
 sealed class ChatbotState {}
 
 final class ChatbotInitial extends ChatbotState {}
+final class ChatbotInitState extends ChatbotState {}
 final class ChatbotLoadingState extends ChatbotState {}
 final class ChatbotReceiveState extends ChatbotState {}
 final class ChatbotSendState extends ChatbotState {}

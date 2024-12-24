@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:final_project_2024/core/services/APIs/boycott_api.dart';
 import 'package:final_project_2024/core/services/APIs/chat_bot_api.dart';
 import 'package:final_project_2024/core/services/APIs/home_api.dart';
+import 'package:final_project_2024/core/services/APIs/profile_api.dart';
 import 'package:final_project_2024/features/chatbot/data/repository/chat_bot_repo_imp.dart';
 import 'package:final_project_2024/features/home/data/repository/home_repo_imp.dart';
+import 'package:final_project_2024/features/profile/data/repository/profile_repo_imp.dart';
 import 'package:final_project_2024/features/servicesFeature/boycott/data/repository/boycott_repo_imp.dart';
 import 'package:get_it/get_it.dart';
 
@@ -18,6 +20,7 @@ void initServiceLocator() {
   sl.registerSingleton(ChatBotApi(Dio()));
   sl.registerSingleton(BoycottApi(Dio()));
   sl.registerSingleton(HomeApi(Dio()));
+  sl.registerSingleton(ProfileApi(Dio()));
   sl.registerSingleton<RegisterRepoImpl>(RegisterRepoImpl(
     sl.get<RegisterApiService>(),
   ));
@@ -29,5 +32,8 @@ void initServiceLocator() {
   ));
   sl.registerSingleton<HomeRepoImp>(HomeRepoImp(
     sl.get<HomeApi>(),
+  ));
+  sl.registerSingleton<ProfileRepoImp>(ProfileRepoImp(
+    sl.get<ProfileApi>(),
   ));
 }

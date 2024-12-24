@@ -3,4 +3,5 @@ import 'package:final_project_2024/features/servicesFeature/boycott/data/models/
 class GenericVariables{
   static Data? data;
   static String? alternativeMsg;
+  static String? commentId;
 }

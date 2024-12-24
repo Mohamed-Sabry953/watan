@@ -71,40 +71,36 @@ class ServicesPage extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: REdgeInsets.only(bottom: 8.0,top: 20,left: 8,right: 8),
+              padding: REdgeInsets.only(bottom: 8.0,top: 20,left: 8,right: 25),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height*0.65,
-                    width: MediaQuery.of(context).size.width*0.92,
-                    child: Expanded(
-                      child: GridView.builder(
-                        itemCount: 3,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            mainAxisExtent: 225,
-                            mainAxisSpacing: 20,
-                              crossAxisSpacing: 10,
-                              crossAxisCount: 2),
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                if(index==0){
-                                Navigator.pushNamed(context, AppRoutesName.boycottpage);
-                                }
-                                else if(index==1){
-                                  Navigator.pushNamed(context, AppRoutesName.donateScreen);
-                                }
-                              },
-                              child: ServiceItemWidget(
-                                describetion: describtion[index],
-                                iconImage: iconImages[index],
-                                serviceImage: serviceImages[index],
-                              ),
-                            );
-                          },),
-                    ),
+                  Expanded(
+                    child: GridView.builder(
+                      itemCount: 3,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisExtent: 225,
+                          mainAxisSpacing: 20,
+                            crossAxisSpacing: 10,
+                            crossAxisCount: 2),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              if(index==0){
+                              Navigator.pushNamed(context, AppRoutesName.boycottpage);
+                              }
+                              else if(index==1){
+                                Navigator.pushNamed(context, AppRoutesName.donateScreen);
+                              }
+                            },
+                            child: ServiceItemWidget(
+                              describetion: describtion[index],
+                              iconImage: iconImages[index],
+                              serviceImage: serviceImages[index],
+                            ),
+                          );
+                        },),
                   )
                 ],
               ),

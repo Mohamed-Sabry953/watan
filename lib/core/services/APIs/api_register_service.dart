@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:final_project_2024/core/cache/cachData.dart';
 
 import '../../utils/constant/apiConstance.dart';
 
@@ -98,6 +99,23 @@ class RegisterApiService {
     var response=await dio.post(
       ApiConstance.resetPass,
       data: verifyEmailData,
+    );
+    return response;
+  }
+
+  // profile method
+  Future<Response> getProfile() async {
+    String token=await CacheData.getUserToken(key: "user_token");
+    var response=await dio.get(
+        ApiConstance.profile,
+        options: Options(
+            method: "GET",
+            headers: {
+              "Accept": "application/json",
+              "type": "text",
+              "Authorization": "Bearer $token"
+            }
+        )
     );
     return response;
   }

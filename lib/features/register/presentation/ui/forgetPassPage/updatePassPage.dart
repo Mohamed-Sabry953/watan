@@ -3,20 +3,33 @@ import 'dart:async';
 import 'package:final_project_2024/core/services/responsiveUi/responsive_height.dart';
 import 'package:final_project_2024/core/utils/constant/images.dart';
 import 'package:final_project_2024/features/register/presentation/manger/register_cubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../../core/utils/constant/appColors.dart';
-import '../../widgets/emailVerificationWidgets/verification_button.dart';
-import '../../widgets/registerWidgets/register_textfeild.dart';
 
-class UpdatePassPage extends StatelessWidget {
+class UpdatePassPage extends StatefulWidget {
   UpdatePassPage({super.key});
+
+  @override
+  State<UpdatePassPage> createState() => _UpdatePassPageState();
+}
+
+class _UpdatePassPageState extends State<UpdatePassPage> {
   final StreamController<ErrorAnimationType> errorAnimationController=StreamController();
+
   final TextEditingController email=TextEditingController();
+
   final TextEditingController pass=TextEditingController();
+
   final TextEditingController passConfirm=TextEditingController();
+  final  formKey=GlobalKey<FormState>();
+
+  bool obscureTextOne=true;
+  bool obscureTextTwo=true;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -40,7 +53,9 @@ class UpdatePassPage extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        body: SingleChildScrollView(
+        body: Form(
+            key: formKey,
+            child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
             child: Column(
@@ -61,54 +76,76 @@ class UpdatePassPage extends StatelessWidget {
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 24)), // Code Input Field widget
                 TextFormField(
+                  validator: RegisterCubit.get(context).validateStrongPassword,
+                  onChanged: (value) {
+                    RegisterCubit.get(context).passConfirm=pass.text;
+                  },
+                  obscureText: obscureTextOne,
                   controller: pass,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      )
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      borderSide: BorderSide(
-                        color: AppColors.primary
-                      )
-                    ),
-                    label: Text("Password",style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black.withOpacity(0.7)
-                    ),)
+                      suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              obscureTextOne=! obscureTextOne;
+                            });
+                          },
+                          child: Icon(obscureTextOne?CupertinoIcons.eye_slash:CupertinoIcons.eye)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: BorderSide(
+                              color: AppColors.primary
+                          )
+                      ),
+                      label: Text("Password",style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.7)
+                      ),)
                   ),
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 24),),
                 TextFormField(
+                  validator: RegisterCubit.get(context).validatePasswordConfirmation,
                   controller: passConfirm,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                      )
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      borderSide: const BorderSide(
-                        color: AppColors.primary
-                      )
-                    ),
-                    label: Text("Confirm password",style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                        color: Colors.black.withOpacity(0.7)
-                    ),)
+                      suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              obscureTextTwo=! obscureTextTwo;
+                            });
+                          },
+                          child: Icon(obscureTextTwo?CupertinoIcons.eye_slash:CupertinoIcons.eye)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                          )
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                          borderSide: const BorderSide(
+                              color: AppColors.primary
+                          )
+                      ),
+                      label: Text("Confirm password",style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.7)
+                      ),)
                   ),
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 66),),
                 ElevatedButton(
                   onPressed: () {
-                    RegisterCubit.get(context).resetPass(context, email: RegisterCubit.get(context).verifictionEmail, pass: pass.text, passConfirm: passConfirm.text);
+                    if(formKey.currentState!.validate()??false){
+                      RegisterCubit.get(context).resetPass(context, email: RegisterCubit.get(context).verifictionEmail, pass: pass.text, passConfirm: passConfirm.text);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(1000, widgetHeight(context: context, height: 60)),
@@ -127,7 +164,7 @@ class UpdatePassPage extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        )),
       ),
     );
   }

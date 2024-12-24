@@ -16,6 +16,7 @@ import '../../widgets/registerWidgets/register_textfeild.dart';
 class ForgetPassScreen extends StatelessWidget {
    ForgetPassScreen({super.key});
   final StreamController<ErrorAnimationType> errorAnimationController=StreamController();
+   final formKey = GlobalKey<FormState>();
   final TextEditingController email=TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -40,38 +41,44 @@ class ForgetPassScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                 SizedBox(height: 40.h),
-                 SvgPicture.asset(Images.forgetPassIcon),
-                 SizedBox(height: widgetHeight(context: context, height: 35),),
-                 Text(
-                  "Mail Address Here",
-                  style: TextStyle(fontSize: 20.sp, color: AppColors.primary, fontWeight: FontWeight.bold),
+        body: Form(
+            key: formKey,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 40.h),
+                    SvgPicture.asset(Images.forgetPassIcon),
+                    SizedBox(height: widgetHeight(context: context, height: 35),),
+                    Text(
+                      "Mail Address Here",
+                      style: TextStyle(fontSize: 20.sp, color: AppColors.primary, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 25.h),
+                    Text(
+                      "Enter the email address associated with your account",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 13.sp, color: Colors.black87),
+                    ),
+                    SizedBox(height: widgetHeight(context: context, height: 40)), // Code Input Field widget
+                    RegisterTextField(textEditingController: email,fill: false,border: true,hintText: "Email",suffixIcon: false,
+                      validator: RegisterCubit.get(context).validateEmail,
+                      formState: formKey.currentState?.validate() ?? true,
+                    ),
+                    SizedBox(height: widgetHeight(context: context, height: 60),),
+                    VerifyButton(pinCode: "",function: (){
+                      if(formKey.currentState!.validate()??false){
+                        RegisterCubit.get(context).forgetPass(context, email: email.text);
+                      }
+                    },), // Verify Button widget
+                    SizedBox(height: 30.h),
+                  ],
                 ),
-                 SizedBox(height: 25.h),
-                 Text(
-                  "Enter the email address associated with your account",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 13.sp, color: Colors.black87),
-                ),
-                 SizedBox(height: widgetHeight(context: context, height: 40)), // Code Input Field widget
-                RegisterTextField(textEditingController: email,fill: false,border: true,hintText: "Email",
+              ),
+            ),)
 
-                ),
-                SizedBox(height: widgetHeight(context: context, height: 60),),
-                  VerifyButton(pinCode: "",function: (){
-                    RegisterCubit.get(context).forgetPass(context, email: email.text);
-                 },), // Verify Button widget
-                 SizedBox(height: 30.h),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }

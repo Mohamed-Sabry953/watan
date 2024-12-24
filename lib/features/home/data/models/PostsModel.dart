@@ -1,11 +1,11 @@
 class PostsModel {
   PostsModel({
-      this.success, 
-      this.message, 
-      this.data,});
+    this.success,
+    this.message,
+    this.data,});
 
   PostsModel.fromJson(dynamic json) {
-    success = json['success'];
+    success = json['success'] == true || json['success'] == 1 || json['success'] == "true";
     message = json['message'];
     if (json['data'] != null) {
       data = [];
@@ -32,21 +32,24 @@ class PostsModel {
 
 class Data {
   Data({
-      this.id, 
-      this.title, 
-      this.content, 
-      this.status, 
-      this.media, 
-      this.userId, 
-      this.user,});
+    this.id,
+    this.title,
+    this.content,
+    this.status,
+    this.media,
+    this.userId,
+    this.user,});
 
   Data.fromJson(dynamic json) {
-    id = json['id'];
+    id = json['id'] is int ? json['id'] : int.tryParse(json['id'].toString());
     title = json['title'];
     content = json['content'];
     status = json['status'];
-    media = json['media'] != null ? json['media'].cast<String>() : [];
-    userId = json['user_id'];
+    // Safely handle media field
+    media = json['media'] != null && json['media'] is List
+        ? List<String>.from(json['media'].map((item) => item.toString()))
+        : [];
+    userId = json['user_id'] is int ? json['user_id'] : int.tryParse(json['user_id'].toString());
     user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
   num? id;
@@ -75,14 +78,17 @@ class Data {
 
 class User {
   User({
-      this.id, 
-      this.profilePhoto,});
+    this.id,
+    this.name,
+    this.profilePhoto,});
 
   User.fromJson(dynamic json) {
-    id = json['id'];
+    id = json['id'] is int ? json['id'] : int.tryParse(json['id'].toString());
+    name = json['name'];
     profilePhoto = json['profile_photo'];
   }
   num? id;
+  String? name;
   String? profilePhoto;
 
   Map<String, dynamic> toJson() {

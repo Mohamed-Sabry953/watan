@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/utils/constant/images.dart';
+import '../../../../register/presentation/manger/register_cubit.dart';
 
 class AppHeader extends StatelessWidget {
-  const AppHeader({super.key});
-
+   AppHeader(this.scaffoldKey,{super.key});
+  GlobalKey<ScaffoldState> scaffoldKey;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,7 +35,11 @@ class AppHeader extends StatelessWidget {
               ],
             ),
              SizedBox(width: 14.w),
-             Icon(Icons.menu,size: 24.sp,),
+             GestureDetector(
+                 onTap: () {
+                   scaffoldKey.currentState!.openDrawer();
+                 },
+                 child: Icon(Icons.menu,size: 24.sp,)),
           ],
         ),
       ],
