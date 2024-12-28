@@ -4,13 +4,10 @@ import 'package:final_project_2024/core/utils/constant/generic_variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../../../../../core/utils/constant/appColors.dart';
-import '../../../../../core/utils/constant/appConstant.dart';
 import '../../../../../core/utils/constant/styles.dart';
-import '../../../../chatbot/presentation/ui/widgets/chat_textfield.dart';
-import '../../../../register/presentation/manger/register_cubit.dart';
 import '../../manger/cubit/home_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class PostWidget extends StatelessWidget {
   PostWidget({required this.index, required this.homeState,super.key});
@@ -268,7 +265,8 @@ class PostWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 8,right: 8),
                         child: Row(
                           children: [
-                            Text("Write a comment",style: Styles.poppins16400Black(context),)
+                            Text(
+    AppLocalizations.of(context)!.comment, style: Styles.poppins16400Black(context),)
                           ],
                         ),
                       ),

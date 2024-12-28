@@ -14,6 +14,7 @@ import '../../../../core/utils/constant/images.dart';
 import '../../../../core/utils/constant/styles.dart';
 import '../../../../core/utils/service locator/service_locator.dart';
 import '../../../chatbot/presentation/ui/widgets/chat_textfield.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../register/presentation/manger/register_cubit.dart';
 
 class CommentsPage extends StatelessWidget {
@@ -66,7 +67,8 @@ class CommentsPage extends StatelessWidget {
             ),
             Expanded(
               child: state is HomeLoadingState
-                  ? ListView.separated(
+                  ?
+              ListView.separated(
                 itemCount: 3, // Example shimmer item count
                 separatorBuilder: (context, index) => SizedBox(
                   height: widgetHeight(context: context, height: 12),
@@ -105,7 +107,23 @@ class CommentsPage extends StatelessWidget {
                   );
                 },
               )
-                  : ListView.separated(
+                  :HomeCubit.get(context).homeRepoImp.commentsModel?.data?.length==0 ?
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(Images.noComments,height: 300,),
+                  Align(
+                      alignment: Alignment.center
+                      ,child: Text(AppLocalizations.of(context)!.noComments,style: TextStyle(
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.lightGrey
+                  ),)),
+                  SizedBox(height: widgetHeight(context: context, height: 100),)
+                ],
+              )
+                  :ListView.separated(
                 itemBuilder: (context, index) {
                   final commentData = HomeCubit.get(context).homeRepoImp.commentsModel?.data?[index];
                   return Padding(
@@ -191,7 +209,7 @@ class CommentsPage extends StatelessWidget {
                           isFilled: true,
                           fillColor: Colors.transparent,
                           hasBorder: false,
-                          hintText: "Write a comment",
+                          hintText: AppLocalizations.of(context)!.comment,
                           style: Styles.poppins16400Black(context),
                           hintStyle: Styles.poppins16400Black(context),
                         ),

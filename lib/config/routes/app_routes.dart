@@ -1,8 +1,9 @@
 import 'package:final_project_2024/core/compponents/reuseable_components.dart';
 import 'package:final_project_2024/features/home/presentation/ui/commentsPage.dart';
 import 'package:final_project_2024/features/home/presentation/ui/createPostPage.dart';
+import 'package:final_project_2024/features/home/presentation/ui/privacyPolicy.dart';
 import 'package:final_project_2024/features/homeLayout.dart';
-import 'package:final_project_2024/features/onBoarding/onBoardingPage.dart';
+import 'package:final_project_2024/features/onBoarding/OnBoardingThree.dart';
 import 'package:final_project_2024/features/profile/presentation/ui/profilePage.dart';
 import 'package:final_project_2024/features/register/presentation/ui/emailVerificationPage/email_verification_page.dart';
 import 'package:final_project_2024/features/register/presentation/ui/forgetPassPage/forget_pass_page.dart';
@@ -12,10 +13,14 @@ import 'package:final_project_2024/features/register/presentation/ui/registerScr
 import 'package:final_project_2024/features/register/presentation/ui/registerScreen/signupPage.dart';
 import 'package:final_project_2024/features/servicesFeature/donate/presentation/ui/donatePage.dart';
 import 'package:flutter/material.dart';
+import '../../features/notification/presentation/ui/notification.dart';
+import '../../features/onBoarding/OnBoardingOne.dart';
+import '../../features/onBoarding/OnBoardingTwo.dart';
 import '../../features/profile/presentation/ui/updateProfilePage.dart';
 import '../../features/servicesFeature/boycott/presentation/ui/BoycottPage.dart';
 import '../../features/servicesFeature/boycott/presentation/ui/QR Page.dart';
 import '../../features/servicesFeature/boycott/presentation/ui/resultPage.dart';
+import '../../features/welcomePage/onBoardingPage.dart';
 
 class AppRoutesName {
   static const String onBoardingPage="/";
@@ -34,6 +39,11 @@ class AppRoutesName {
   static const String updateProfileScreen="updateProfileScreen";
   static const String commentScreen="commentScreen";
   static const String newPostScreen="newPostScreen";
+  static const String notificationScreen="notificationScreen";
+  static const String privacyPolicy="privacyPolicy";
+  static const String onboardingOne="onboardingOne";
+  static const String onboardingTwo="onboardingTwo";
+  static const String onboardingThree="onboardingThree";
 }
 class AppRoute{
   static Route onGenerate(RouteSettings settings){
@@ -51,25 +61,35 @@ class AppRoute{
         case AppRoutesName.updatePassScreen:
         return MaterialPageRoute(builder: (context) =>  UpdatePassPage(),);
         case AppRoutesName.onBoardingPage:
-        return MaterialPageRoute(builder: (context) =>  Onboardingpage(),);
+        return MaterialPageRoute(builder: (context) =>  const WelcomePage(),);
         case AppRoutesName.forgetPass:
         return MaterialPageRoute(builder: (context) =>  ForgetPassScreen(),);
         case AppRoutesName.boycottpage:
-        return MaterialPageRoute(builder: (context) =>  Boycottpage(),);
+        return MaterialPageRoute(builder: (context) =>  const Boycottpage(),);
         case AppRoutesName.qrPage:
-        return MaterialPageRoute(builder: (context) =>  Qr_page(),);
+        return MaterialPageRoute(builder: (context) =>  const Qr_page(),);
         case AppRoutesName.donateScreen:
-        return MaterialPageRoute(builder: (context) =>  DonateScreen(),);
+        return MaterialPageRoute(builder: (context) =>  const DonateScreen(),);
         case AppRoutesName.resultScreen:
-        return MaterialPageRoute(builder: (context) =>  ResultsScreen(),);
+        return MaterialPageRoute(builder: (context) =>  const ResultsScreen(),);
         case AppRoutesName.profileScreen:
-        return MaterialPageRoute(builder: (context) =>  ProfileScreen(),);
+        return MaterialPageRoute(builder: (context) =>  const ProfileScreen(),);
         case AppRoutesName.commentScreen:
-        return MaterialPageRoute(builder: (context) =>  CommentsPage(),);
+        return MaterialPageRoute(builder: (context) =>  const CommentsPage(),);
         case AppRoutesName.newPostScreen:
-        return MaterialPageRoute(builder: (context) =>  CreatePostPage(),);
+        return MaterialPageRoute(builder: (context) =>  const CreatePostPage(),);
         case AppRoutesName.updateProfileScreen:
-        return MaterialPageRoute(builder: (context) =>  UpdateProfilePage(),);
+        return MaterialPageRoute(builder: (context) =>  const UpdateProfilePage(),);
+        case AppRoutesName.notificationScreen:
+        return MaterialPageRoute(builder: (context) =>  NotificationScreen(),);
+        case AppRoutesName.privacyPolicy:
+        return MaterialPageRoute(builder: (context) =>  const PrivacyPolicyPage(),);
+        case AppRoutesName.onboardingOne:
+        return MaterialPageRoute(builder: (context) =>  const OnboardingOne(),);
+        case AppRoutesName.onboardingTwo:
+        return MaterialPageRoute(builder: (context) =>  const OnboardingTwo(),);
+        case AppRoutesName.onboardingThree:
+        return MaterialPageRoute(builder: (context) =>   const OnboardingThree(),);
       default:
         return MaterialPageRoute(
           builder: (context) => unDefineRoute(),

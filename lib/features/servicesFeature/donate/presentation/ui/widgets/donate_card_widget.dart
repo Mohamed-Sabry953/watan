@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../../core/services/responsiveUi/responsive_height.dart';
 
 class DonationCard extends StatelessWidget {
@@ -42,11 +43,11 @@ class DonationCard extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
+                child: Image.asset(
                   imageUrl,
                   height: 110,
                   width: 100,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
               const SizedBox(width: 16),

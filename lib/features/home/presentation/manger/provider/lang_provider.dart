@@ -15,9 +15,11 @@ class LangProvider extends ChangeNotifier{
     langValue=value!;
     switch(langValue){
       case "English" || "انجليزى":
+        langValue="English";
         langKey="en";
         notifyListeners();
       case "Arabic" || "عربى":
+        langValue="عربى";
         langKey="ar";
         notifyListeners();
     }

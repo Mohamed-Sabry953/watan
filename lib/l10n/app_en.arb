@@ -5,22 +5,25 @@
   "privacy": "Privacy policy",
   "chat": "Chat",
   "logout": "Logout",
-  "@language": {
-    "description": "Label for selecting a language."
-  },
-  "@home": {
-    "description": "Label for the home screen."
-  },
-  "@services": {
-    "description": "Label for the services section."
-  },
-  "@privacy": {
-    "description": "Label for the privacy policy section."
-  },
-  "@chat": {
-    "description": "Label for the chat section."
-  },
-  "@logout": {
-    "description": "Label for the logout button."
-  }
+  "share": "Share your News",
+  "news": "Latest news",
+  "posts": "Posts",
+  "watan": "Watan",
+  "online": "Online",
+  "message": "Write a message",
+  "comment": "Write a comment",
+  "notification": "Notification",
+  "notificationitem": "No notification now",
+  "privacyPolicy": "Privacy Policy",
+  "confirm": "Confirm",
+  "chooseLang": "Choose language",
+  "noComments": "No comments",
+  "privacyOne": "* Watan is committed to protecting your privacy and ensuring a secure experience. This Privacy Policy explains how your data is collected, used, and protected.",
+  "privacyTwo": "* Information We Collect: We may collect personal information such as name, email address, and payment details when registering or making donations. We also collect usage data, location information for map services, and device information for optimization.",
+  "privacyThree": "* Use of Information: We use your data to provide and enhance services like chatbot functionality, post sharing, donation processing, and interactive maps. We also tailor content based on your preferences and location.",
+  "privacyFour": "* Protecting Information: We implement robust security measures such as encryption and secure servers to protect your data. However, no method of transmission is entirely secure, so we recommend safeguarding your account credentials.",
+  "privacyFive": "* Sharing Information: We do not sell your personal information. Data may be shared with service providers for platform operation, charitable organizations for donations, or legal authorities if required.",
+  "privacySix": "* Your Rights: You can access, update, or delete your personal information via your account settings. You may also opt out of receiving promotional messages.",
+  "privacySeven": "* Changes to the Privacy Policy: This policy may be updated periodically. Any changes will be posted with an updated effective date. Please review it regularly.",
+  "privacyEight": "* Contact Us: For questions about this policy or your information, contact the Watan Support Team at support@watanappp.com."
 }

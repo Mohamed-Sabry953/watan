@@ -10,12 +10,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'dart:io';
 import '../../../../core/utils/constant/appColors.dart';
 import '../../../../core/utils/constant/appConstant.dart';
 import '../../../../core/utils/constant/styles.dart';
 import '../../../../core/utils/service locator/service_locator.dart';
+import '../../../home/presentation/manger/provider/lang_provider.dart';
 import '../../../register/presentation/manger/register_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -42,6 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    var provider= Provider.of<LangProvider>(context);
     bool isMe=true;
     return BlocProvider(create: (context) => ChatbotCubit(sl<ChatBotRepoImp>()),
     child: BlocBuilder<ChatbotCubit,ChatbotState>(builder: (context, state) {
@@ -71,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 onTap: () {
                                   RegisterCubit.get(context).changeBottomNavIndex(1);
                                 },
-                                child: SvgPicture.asset(Images.backArrow)),
+                                child: provider.langKey=="en"?SvgPicture.asset(Images.backArrow):const Icon(Icons.arrow_back)),
                             SizedBox(width: 12.w,),
                             Container(
                               decoration: const ShapeDecoration(shape: CircleBorder(
@@ -92,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  "watan",
+                                  AppLocalizations.of(context)!.watan,
                                   style: Styles.poppins16500White(context).copyWith(
                                     color: Colors.black,
                                     fontSize: 16.sp,
@@ -108,7 +112,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     ),
                                     SizedBox(width: 3.w,),
                                     Text(
-                                      "online",
+                                      AppLocalizations.of(context)!.online,
                                       style: Styles.poppins16400Black(context).copyWith(
                                         color: Colors.green,
                                       ),
@@ -154,7 +158,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               isMe = message['isMe'];
                               final isImage = message['isImage'];
                               return isMe?Align(
-                                alignment: isMe
+                                alignment: isMe && provider.langKey=="en"
                                     ? Alignment.centerLeft
                                     : Alignment.centerRight,
                                 child: Container(
@@ -203,7 +207,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                 ),
                               ):Align(
-                                alignment: isMe
+                                alignment: isMe && provider.langKey=="ar"
                                     ? Alignment.centerLeft
                                     : Alignment.centerRight,
                                 child: Container(
@@ -258,7 +262,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
                         state is ChatbotLoadingState ||state is ChatbotSendState ?
                         Align(
-                          alignment: isMe==false
+                          alignment: isMe==false && provider.langKey=="ar"
                               ? Alignment.centerLeft
                               : Alignment.centerRight,
                           child: Container(
@@ -323,7 +327,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       isFilled: true,
                                       fillColor: Colors.transparent,
                                       hasBorder: false,
-                                      hintText: "Write a message",
+                                      hintText: AppLocalizations.of(context)!.message,
                                       style:Styles.poppins16500White(context) ,
                                       hintStyle: Styles.poppins16500White(context),
                                     ),

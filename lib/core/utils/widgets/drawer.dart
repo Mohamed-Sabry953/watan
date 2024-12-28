@@ -24,7 +24,7 @@ class CustomDarwer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RegisterCubit,RegisterState>(builder: (context, state) {
       return Container(
-        margin: REdgeInsetsDirectional.only(end: 100),
+        margin: REdgeInsetsDirectional.only(end: 120),
         width: widgetWidth(context: context, width: 300),
         height: double.infinity,
         decoration: BoxDecoration(
@@ -125,6 +125,7 @@ class CustomDarwer extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   RegisterCubit.get(context).changeDrawerItemIndex(2);
+                  Navigator.pushNamed(context, AppRoutesName.privacyPolicy);
                 },
                 child: DrawerItem(
                   color: RegisterCubit.get(context).drawerIndex==2?AppColors.primary.withOpacity(0.15):Colors.transparent,

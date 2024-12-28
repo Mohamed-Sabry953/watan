@@ -1,6 +1,7 @@
 import 'package:final_project_2024/config/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShareNewsCard extends StatelessWidget {
   const ShareNewsCard({super.key});
@@ -32,7 +33,7 @@ class ShareNewsCard extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                'Share Your News',
+                AppLocalizations.of(context)!.share,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const Spacer(),

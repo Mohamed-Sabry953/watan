@@ -1,16 +1,15 @@
 import 'dart:ui';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:final_project_2024/features/home/presentation/manger/provider/lang_provider.dart';
-import 'package:final_project_2024/features/register/presentation/manger/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../services/responsiveUi/responsive_height.dart';
 import '../../services/responsiveUi/responsive_width.dart';
 
 class LanguageDropDownButton extends StatelessWidget {
-  LanguageDropDownButton({required this.mainAxisAlignment,required this.height,required this.buttonWidth,super.key});
+  const LanguageDropDownButton({required this.mainAxisAlignment,required this.height,required this.buttonWidth,super.key});
   final double buttonWidth;
   final double height;
   final MainAxisAlignment mainAxisAlignment;
@@ -36,8 +35,8 @@ class LanguageDropDownButton extends StatelessWidget {
               ),
             ],
           ),
-          items: provider.items
-              .map((String item) => DropdownMenuItem<String>(
+          items:
+          provider.langKey=="en"?provider.items.map((String item) => DropdownMenuItem<String>(
             value: item,
             child: Text(
               item,
@@ -48,8 +47,19 @@ class LanguageDropDownButton extends StatelessWidget {
               ),
               overflow: TextOverflow.ellipsis,
             ),
-          ))
-              .toList(),
+          )).toList():
+          provider.arItems.map((String item) => DropdownMenuItem<String>(
+            value: item,
+            child: Text(
+              item,
+              style:  TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xff33312C),
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          )).toList(),
           value: provider.langValue,
           onChanged: (String? value) {
             provider.changeLang(value);

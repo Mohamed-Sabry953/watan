@@ -64,11 +64,11 @@ class DonationCard extends StatelessWidget {
   final String description;
 
   const DonationCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -92,11 +92,11 @@ class DonationCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               height: 120,
               width: 110,
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
             ),
           ),
           const SizedBox(width: 16),

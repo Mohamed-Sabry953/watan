@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../core/utils/constant/appColors.dart';
 import '../core/utils/widgets/drawer.dart';
 
@@ -30,7 +30,7 @@ class HomeLayout extends StatelessWidget {
           items:  [
             CurvedNavigationBarItem(
                 child: SvgPicture.asset(Images.servicesIcon,color: Colors.white,width: 20.w,),
-                label:"Services",
+                label:AppLocalizations.of(context)!.services,
                 labelStyle: TextStyle(
                     fontSize: 13.sp,
                     color: Colors.white
@@ -42,7 +42,7 @@ class HomeLayout extends StatelessWidget {
                   size: 19.sp,
                   color: Colors.white,
                 ),
-                label: "Home",
+                label: AppLocalizations.of(context)!.home,
                 labelStyle: TextStyle(
                     fontSize: 13.sp,
                     color: Colors.white
@@ -51,7 +51,7 @@ class HomeLayout extends StatelessWidget {
 
             CurvedNavigationBarItem(
                 child: SvgPicture.asset(Images.chatIcon,color: Colors.white,width: 20.w,),
-                label: "Chat",
+                label: AppLocalizations.of(context)!.chat,
                 labelStyle: TextStyle(
                     fontSize: 13.sp,
                     color: Colors.white

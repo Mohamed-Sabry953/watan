@@ -1,13 +1,13 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:final_project_2024/features/register/presentation/manger/register_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'config/routes/app_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'features/home/presentation/manger/provider/lang_provider.dart';
+import 'features/onBoarding/onBoardingPage.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,6 +15,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
         var provider= Provider.of<LangProvider>(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -22,7 +26,11 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          localizationsDelegates:  [
+
+          theme: ThemeData(
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          localizationsDelegates:  const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -34,6 +42,7 @@ class MyApp extends StatelessWidget {
           ],
           locale:  Locale(provider.langKey),
           useInheritedMediaQuery: true,
+          home: const Onboardingpage(),
           builder: DevicePreview.appBuilder,
           onGenerateRoute: (settings) =>AppRoute.onGenerate(settings) ,
           debugShowCheckedModeBanner: false,

@@ -7,14 +7,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/cache/cachData.dart';
 
-class Onboardingpage extends StatefulWidget {
-  const Onboardingpage({super.key});
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
 
   @override
-  State<Onboardingpage> createState() => _OnboardingpageState();
+  State<WelcomePage> createState() => _WelcomePageState();
 }
 
-class _OnboardingpageState extends State<Onboardingpage> with SingleTickerProviderStateMixin {
+class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _bounceScaleAnimation;
@@ -41,9 +41,7 @@ class _OnboardingpageState extends State<Onboardingpage> with SingleTickerProvid
   void navigate(){
     Future.delayed(Duration(seconds: 5),() {
       CacheData.getUserToken(key: "user_token")==null?Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.loginScreen, (route) => false,):
-      Navigator.pushNamed(context, AppRoutesName.onboardingOne);
-
-      // Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.homeLayout, (route) => false,);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.homeLayout, (route) => false,);
     },);
   }
   @override

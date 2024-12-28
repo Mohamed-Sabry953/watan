@@ -1,6 +1,3 @@
-// main.dart
-import 'package:final_project_2024/core/utils/constant/images.dart';
-import 'package:final_project_2024/core/utils/widgets/drawer.dart';
 import 'package:final_project_2024/features/home/data/repository/home_repo_imp.dart';
 import 'package:final_project_2024/features/home/presentation/manger/cubit/home_cubit.dart';
 import 'package:final_project_2024/features/home/presentation/ui/widgets/app_bar_widget.dart';
@@ -10,8 +7,7 @@ import 'package:final_project_2024/features/home/presentation/ui/widgets/share_p
 import 'package:final_project_2024/features/register/presentation/manger/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../core/utils/service locator/service_locator.dart';
 
@@ -52,9 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       const ShareNewsCard(),
                       const SizedBox(height: 24),
-                      const Text(
-                        'Latest News',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.news,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),

@@ -4,7 +4,7 @@ import 'package:final_project_2024/features/register/presentation/manger/registe
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../services/responsiveUi/responsive_height.dart';
 import '../../services/responsiveUi/responsive_width.dart';
 
@@ -78,7 +78,7 @@ class _MessageState extends State<LanguageMessage> with SingleTickerProviderStat
                               padding: REdgeInsetsDirectional.only(start: 16,top: 16),
                               child: Align(
                                 alignment: AlignmentDirectional.topStart,
-                                child: Text("Choose language",
+                                child: Text(AppLocalizations.of(context)!.chooseLang,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 16.sp,
@@ -113,7 +113,7 @@ class _MessageState extends State<LanguageMessage> with SingleTickerProviderStat
                                         backgroundColor: AppColors.primary,
                                         fixedSize: Size(widgetWidth(context: context, width:125 ), widgetHeight(context: context, height: 50))
                                     ), child: Center(
-                                        child: Text("Confirm",
+                                        child: Text(AppLocalizations.of(context)!.confirm,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 16.sp,

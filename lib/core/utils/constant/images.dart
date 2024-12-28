@@ -18,17 +18,30 @@ class Images{
   static const String onBoardingTwo = "assets/projectImages/svg/onBoardingTwo.svg";
   static const String notification = "assets/projectImages/svg/notification.svg";
   static const String pickImage = "assets/projectImages/svg/pickImage.svg";
+  static const String onBoardingImage = "assets/projectImages/svg/onBoardingImage.svg";
+  static const String onBoardingBoycott = "assets/projectImages/svg/onBoardingBoycott.svg";
 
+  //jpg images
+  static const String boycott="assets/projectImages/appImages/boycott.jpg";
+  static const String noComments="assets/projectImages/appImages/noComments.jpg";
+  static const String resala="assets/projectImages/appImages/donate/resala.jpg";
 
   // Png images
-  static const String boycott="assets/projectImages/appImages/boycott.jpg";
+  static const String countries="assets/projectImages/appImages/countries.png";
   static const String donate="assets/projectImages/appImages/donate.png";
   static const String chatBackground="assets/projectImages/appImages/chatBackground.png";
   static const String mapService="assets/projectImages/appImages/mapService.png";
   static const String donateBackground="assets/projectImages/appImages/donateBackground.png";
+  static const String onbordingBackground="assets/projectImages/appImages/onbordingBacground.png";
+  static const String h57357="assets/projectImages/appImages/donate/57357.png";
+  static const String alain="assets/projectImages/appImages/donate/alain.png";
+  static const String fasial="assets/projectImages/appImages/donate/fasil.png";
+  static const String magdy="assets/projectImages/appImages/donate/magdy.png";
+  static const String red="assets/projectImages/appImages/donate/red.png";
 
   // lottie assets
   static const String chat="assets/projectImages/json/chat.json";
   static const String emptyChat="assets/projectImages/json/emptyChat.json";
+  static const String notificationJson="assets/projectImages/json/notification.json";
 
 }
