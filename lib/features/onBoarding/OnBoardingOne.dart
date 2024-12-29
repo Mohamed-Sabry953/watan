@@ -22,10 +22,8 @@ class OnboardingOne extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(flex: 4,),
-              Image.asset(Images.countries, height: 250,width: 400,fit: BoxFit.fill,), // استبدل 'assets/phone.png' بمسار الصورة
+              SvgPicture.asset(Images.onBoardingOne, height: 250,width: 400,fit: BoxFit.fill,), // استبدل 'assets/phone.png' بمسار الصورة
               const SizedBox(height: 20),
-        
-        
               const Text(
                 "Find Your Destination\nAnd What Happen\nAround You",
                 textAlign: TextAlign.center,

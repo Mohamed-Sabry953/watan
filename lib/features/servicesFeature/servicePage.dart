@@ -42,10 +42,7 @@ class ServicesPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SvgPicture.asset(
-                  Images.backArrowIos,
-                  color: Colors.white,
-                ),
+                const SizedBox(),
                 Text(
                   "Services",
                   style: TextStyle(
@@ -92,6 +89,9 @@ class ServicesPage extends StatelessWidget {
                               }
                               else if(index==1){
                                 Navigator.pushNamed(context, AppRoutesName.donateScreen);
+                              }
+                              else if(index==2){
+                                Navigator.pushNamed(context, AppRoutesName.countryMaps);
                               }
                             },
                             child: ServiceItemWidget(

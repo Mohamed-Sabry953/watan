@@ -26,6 +26,7 @@ class ChatbotCubit extends Cubit<ChatbotState> {
           'isMe': true,
           'isImage': false,
         });
+        print(messages[0]);
         emit(ChatbotSendState());
         controller.clear();
       func();

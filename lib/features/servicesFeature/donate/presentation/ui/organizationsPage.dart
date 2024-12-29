@@ -1,46 +1,51 @@
+import 'package:final_project_2024/core/services/responsiveUi/responsive_height.dart';
+import 'package:final_project_2024/core/utils/constant/generic_variables.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrganizationDetailsScreen extends StatelessWidget {
-  const OrganizationDetailsScreen({Key? key}) : super(key: key);
+  const OrganizationDetailsScreen( {super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            // Handle back navigation
+            Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.black),
-            onPressed: () {
-              // Handle options menu
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Organization Image and Info
-              OrganizationInfoSection(
-                imageUrl: 'https://via.placeholder.com/150',
-                name: 'Resala Charity Organization',
-                address: 'demo address 21 chini street',
-                phone: '0345681236567',
-                website: 'https://jkhkfgfypl;nhhjn.com',
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20.r),
+                child: Image.asset(
+                  GenericVariables.donateDataModel!.image,
+                  height: widgetHeight(context: context, height: 300),
+                  width: widgetHeight(context: context, height: 360),
+                  fit: BoxFit.fill,
+                ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: widgetHeight(context: context, height: 16),),
+               OrganizationInfoSection(
+                imageUrl: 'https://via.placeholder.com/150',
+                name: GenericVariables.donateDataModel!.title,
+                address: GenericVariables.donateDataModel!.address,
+                phone: GenericVariables.donateDataModel!.phoneNumber,
+                website: GenericVariables.donateDataModel!.link,
+              ),
+               SizedBox(height: 16.h),
 
               // Photos Section
               SectionHeader(
@@ -49,23 +54,18 @@ class OrganizationDetailsScreen extends StatelessWidget {
                   // Handle See All action
                 },
               ),
-              const SizedBox(height: 8),
-              PhotosSection(
-                photoUrls: [
-                  'https://via.placeholder.com/80',
-                  'https://via.placeholder.com/80',
-                  'https://via.placeholder.com/80',
-                  'https://via.placeholder.com/80',
-                ],
+               SizedBox(height: 8.h),
+               PhotosSection(
+                photoUrls: GenericVariables.donateDataModel?.images??[],
               ),
               const SizedBox(height: 16),
 
               // More Details Section
-              SectionHeader(title: "More Details"),
+              const SectionHeader(title: "More Details"),
               const SizedBox(height: 8),
-              const Text(
-                "Together, we can change the world. Your call to give brings hope...\n\nLet your support express your belief in humanity and give a hand to those in need.",
-                style: TextStyle(fontSize: 14, color: Colors.grey),
+               Text(
+                GenericVariables.donateDataModel!.details,
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
               ),
             ],
           ),
@@ -97,15 +97,6 @@ class OrganizationInfoSection extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(12),
-          child: Image.network(
-            imageUrl,
-            height: 100,
-            width: 100,
-            fit: BoxFit.cover,
-          ),
-        ),
         const SizedBox(width: 16),
         Expanded(
           child: Column(
@@ -122,12 +113,12 @@ class OrganizationInfoSection extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const Icon(Icons.location_on, size: 16, color: Colors.grey),
+                  const Icon(Icons.location_on, size: 16, color: Color(0xff2E2C2C)),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       address,
-                      style: const TextStyle(fontSize: 14, color: Colors.grey),
+                      style: const TextStyle(fontSize: 14, color: Color(0xff2E2C2C)),
                     ),
                   ),
                 ],
@@ -135,26 +126,31 @@ class OrganizationInfoSection extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const Icon(Icons.phone, size: 16, color: Colors.grey),
+                  const Icon(Icons.phone, size: 16, color: Color(0xff2E2C2C)),
                   const SizedBox(width: 8),
                   Text(
                     phone,
-                    style: const TextStyle(fontSize: 14, color: Colors.grey),
+                    style: const TextStyle(fontSize: 14, color: Color(0xff2E2C2C)),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  const Icon(Icons.link, size: 16, color: Colors.grey),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      website,
-                      style: const TextStyle(fontSize: 14, color: Colors.blue),
+               SizedBox(height: 8.w),
+              GestureDetector(
+                onTap: () {
+                  shareOnPlatform();
+                },
+                child: Row(
+                  children: [
+                    const Icon(Icons.link, size: 16, color: Color(0xff2E2C2C)),
+                     SizedBox(width: 8.w),
+                    Expanded(
+                      child: Text(
+                        website,
+                        style: const TextStyle(fontSize: 14, color: Colors.blue),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -170,10 +166,10 @@ class SectionHeader extends StatelessWidget {
   final VoidCallback? onSeeAllPressed;
 
   const SectionHeader({
-    Key? key,
+    super.key,
     required this.title,
     this.onSeeAllPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -209,8 +205,9 @@ class PhotosSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80,
-      child: ListView.builder(
+      height: 120,
+      child: ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(width: 10.w,),
         scrollDirection: Axis.horizontal,
         itemCount: photoUrls.length,
         itemBuilder: (context, index) {
@@ -218,11 +215,11 @@ class PhotosSection extends StatelessWidget {
             margin: const EdgeInsets.only(right: 8),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
+              child: Image.asset(
                 photoUrls[index],
-                height: 80,
-                width: 80,
-                fit: BoxFit.cover,
+                height: 120,
+                width: 110,
+                fit: BoxFit.fill,
               ),
             ),
           );
@@ -231,3 +228,13 @@ class PhotosSection extends StatelessWidget {
     );
   }
 }
+  Future<void> shareOnPlatform() async {
+    late Uri url;
+
+      url = Uri.parse(GenericVariables.donateDataModel!.link);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }

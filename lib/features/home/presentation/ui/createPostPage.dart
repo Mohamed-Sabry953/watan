@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../core/services/responsiveUi/responsive_height.dart';
 import '../../../../core/utils/constant/appConstant.dart';
 import '../../../../core/utils/constant/images.dart';
@@ -12,6 +11,7 @@ import '../../../../core/utils/constant/styles.dart';
 import '../../../../core/utils/service locator/service_locator.dart';
 import '../../../chatbot/presentation/ui/widgets/chat_textfield.dart';
 import '../manger/cubit/home_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreatePostPage extends StatelessWidget {
   const CreatePostPage({super.key});
@@ -50,7 +50,7 @@ class CreatePostPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "New post",
+                    AppLocalizations.of(context)!.newPost,
                     style: TextStyle(
                       fontSize: 24.sp,
                       color: Colors.black87,
@@ -73,7 +73,7 @@ class CreatePostPage extends StatelessWidget {
                 right: 10,
               ),
               child: Text(
-                HomeCubit.get(context).post.text.isEmpty?"What are you thinking?":HomeCubit.get(context).post.text,
+                HomeCubit.get(context).post.text.isEmpty?AppLocalizations.of(context)!.thinking:HomeCubit.get(context).post.text,
                 style: TextStyle(
                   fontSize: 18.sp,
                   color: Colors.black87,
@@ -125,7 +125,7 @@ class CreatePostPage extends StatelessWidget {
                           isFilled: true,
                           fillColor: Colors.transparent,
                           hasBorder: false,
-                          hintText: "Write your thoughts",
+                          hintText: AppLocalizations.of(context)!.whatThinking,
                           style: Styles.poppins16400Black(context),
                           hintStyle: Styles.poppins16400Black(context),
                         ),

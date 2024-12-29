@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/utils/constant/appColors.dart';
 import '../../../../core/utils/constant/appConstant.dart';
@@ -15,7 +16,7 @@ import '../../../../core/utils/constant/styles.dart';
 import '../../../../core/utils/service locator/service_locator.dart';
 import '../../../chatbot/presentation/ui/widgets/chat_textfield.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../../register/presentation/manger/register_cubit.dart';
+import '../manger/provider/lang_provider.dart';
 
 class CommentsPage extends StatelessWidget {
   const CommentsPage({super.key});
@@ -23,6 +24,7 @@ class CommentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    var provider= Provider.of<LangProvider>(context);
     return BlocProvider(create: (context) => HomeCubit(sl<HomeRepoImp>())..getComments(GenericVariables.commentId!),
     child: BlocBuilder<HomeCubit,HomeState>(builder: (context, state) {
       return Scaffold(
@@ -47,13 +49,13 @@ class CommentsPage extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: SvgPicture.asset(
+                    child: provider.langKey=="en"?SvgPicture.asset(
                       Images.backArrowIos,
                       color: Colors.black87,
-                    ),
+                    ):Icon(Icons.arrow_back_ios),
                   ),
                   Text(
-                    "Comments",
+                    AppLocalizations.of(context)!.commentpage,
                     style: TextStyle(
                       fontSize: 24.sp,
                       color: Colors.black87,

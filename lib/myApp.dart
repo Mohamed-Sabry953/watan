@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import 'config/routes/app_routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'features/home/presentation/manger/provider/lang_provider.dart';
-import 'features/onBoarding/onBoardingPage.dart';
+import 'features/servicesFeature/donate/presentation/ui/organizationsPage.dart';
+import 'features/servicesFeature/mapsServices/presentation/ui/Country_Maps.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -42,7 +43,6 @@ class MyApp extends StatelessWidget {
           ],
           locale:  Locale(provider.langKey),
           useInheritedMediaQuery: true,
-          home: const Onboardingpage(),
           builder: DevicePreview.appBuilder,
           onGenerateRoute: (settings) =>AppRoute.onGenerate(settings) ,
           debugShowCheckedModeBanner: false,

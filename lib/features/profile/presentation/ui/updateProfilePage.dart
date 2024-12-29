@@ -229,11 +229,28 @@ class UpdateProfilePage extends StatelessWidget {
                             ),
                             Padding(
                               padding: REdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: ProfileCubit.get(context).updateEmail,
-                                decoration: const InputDecoration(
-                                  label: Text("Email"),
+                              child: Container(
 
+                                decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.5),width: 1))
+                                ),
+                                width: double.infinity,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Email",style: TextStyle(
+                                      fontSize: 13.sp,
+                                      color: Colors.black.withOpacity(0.7)
+                                    ),),
+                                    SizedBox(height: 5.h,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 10.0),
+                                      child: Text(ProfileCubit.get(context).updateEmail.text,style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14.sp
+                                      ),),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -247,6 +264,7 @@ class UpdateProfilePage extends StatelessWidget {
                                 ),
                               ),
                             ),
+
                             Padding(
                               padding: REdgeInsets.all(8.0),
                               child: TextFormField(

@@ -20,6 +20,10 @@ import '../../features/profile/presentation/ui/updateProfilePage.dart';
 import '../../features/servicesFeature/boycott/presentation/ui/BoycottPage.dart';
 import '../../features/servicesFeature/boycott/presentation/ui/QR Page.dart';
 import '../../features/servicesFeature/boycott/presentation/ui/resultPage.dart';
+import '../../features/servicesFeature/donate/presentation/ui/organizationsPage.dart';
+import '../../features/servicesFeature/mapsServices/presentation/ui/Country_Maps.dart';
+import '../../features/servicesFeature/mapsServices/presentation/ui/Country_Page.dart';
+import '../../features/servicesFeature/mapsServices/presentation/ui/Nation_Page.dart';
 import '../../features/welcomePage/onBoardingPage.dart';
 
 class AppRoutesName {
@@ -44,6 +48,10 @@ class AppRoutesName {
   static const String onboardingOne="onboardingOne";
   static const String onboardingTwo="onboardingTwo";
   static const String onboardingThree="onboardingThree";
+  static const String organizationDetailsScreen="organizationDetailsScreen";
+  static const String countryPage="country_page";
+  static const String nationPage="nation_page";
+  static const String countryMaps="countryMaps";
 }
 class AppRoute{
   static Route onGenerate(RouteSettings settings){
@@ -90,6 +98,14 @@ class AppRoute{
         return MaterialPageRoute(builder: (context) =>  const OnboardingTwo(),);
         case AppRoutesName.onboardingThree:
         return MaterialPageRoute(builder: (context) =>   const OnboardingThree(),);
+      case AppRoutesName.countryPage:
+        return MaterialPageRoute(builder: (context) =>  CountryPage(),);
+      case AppRoutesName.nationPage:
+        return MaterialPageRoute(builder: (context) =>  NationPage(),);
+        case AppRoutesName.organizationDetailsScreen:
+        return MaterialPageRoute(builder: (context) =>    OrganizationDetailsScreen(),);
+        case AppRoutesName.countryMaps:
+        return MaterialPageRoute(builder: (context) =>    CountryMaps(),);
       default:
         return MaterialPageRoute(
           builder: (context) => unDefineRoute(),

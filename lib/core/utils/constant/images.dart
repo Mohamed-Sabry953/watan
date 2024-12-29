@@ -14,7 +14,8 @@ class Images{
   static const String forgetPassIcon = "assets/projectImages/svg/forgetPass.svg";
   static const String updatePassIcon = "assets/projectImages/svg/updatePass.svg";
   static const String welcome = "assets/projectImages/svg/welcome.svg";
-  static const String onBoardingOne = "assets/projectImages/svg/onBoardingOne.svg";
+  static const String onBoardingOne = "assets/projectImages/svg/onBoradingOne.svg";
+  static const String onBoarding = "assets/projectImages/svg/onBoardingOne.svg";
   static const String onBoardingTwo = "assets/projectImages/svg/onBoardingTwo.svg";
   static const String notification = "assets/projectImages/svg/notification.svg";
   static const String pickImage = "assets/projectImages/svg/pickImage.svg";
@@ -33,11 +34,53 @@ class Images{
   static const String mapService="assets/projectImages/appImages/mapService.png";
   static const String donateBackground="assets/projectImages/appImages/donateBackground.png";
   static const String onbordingBackground="assets/projectImages/appImages/onbordingBacground.png";
+  static const String watanApp="assets/projectImages/appImages/watanApp.png";
   static const String h57357="assets/projectImages/appImages/donate/57357.png";
+
   static const String alain="assets/projectImages/appImages/donate/alain.png";
   static const String fasial="assets/projectImages/appImages/donate/fasil.png";
   static const String magdy="assets/projectImages/appImages/donate/magdy.png";
   static const String red="assets/projectImages/appImages/donate/red.png";
+
+  static const String h57357One="assets/projectImages/appImages/donate/h57357/one.png";
+  static const String h57357Two="assets/projectImages/appImages/donate/h57357/two.png";
+  static const String h57357Three="assets/projectImages/appImages/donate/h57357/three.png";
+  static const String alainOne="assets/projectImages/appImages/donate/alain/one.png";
+  static const String alainTwo="assets/projectImages/appImages/donate/alain/two.png";
+  static const String alainThree="assets/projectImages/appImages/donate/alain/three.png";
+  static const String alainFour="assets/projectImages/appImages/donate/alain/four.png";
+  static const String alainFive="assets/projectImages/appImages/donate/alain/five.png";
+  static const String alainSix="assets/projectImages/appImages/donate/alain/six.png";
+  static const String magdiOne="assets/projectImages/appImages/donate/magdi/one.png";
+  static const String magdiTwo="assets/projectImages/appImages/donate/magdi/two.png";
+  static const String magdiThree="assets/projectImages/appImages/donate/magdi/three.png";
+  static const String magdiFour="assets/projectImages/appImages/donate/magdi/four.png";
+  static const String magdiFive="assets/projectImages/appImages/donate/magdi/five.png";
+  static const String magdiSix="assets/projectImages/appImages/donate/magdi/six.png";
+  static const String magdiSeven="assets/projectImages/appImages/donate/magdi/seven.png";
+  static const String magdiEight="assets/projectImages/appImages/donate/magdi/eight.png";
+  static const String redOne="assets/projectImages/appImages/donate/red/one.png";
+  static const String redTwo="assets/projectImages/appImages/donate/red/two.png";
+  static const String redThree="assets/projectImages/appImages/donate/red/three.png";
+  static const String redFour="assets/projectImages/appImages/donate/red/four.png";
+  static const String redFive="assets/projectImages/appImages/donate/red/five.png";
+  static const String redSix="assets/projectImages/appImages/donate/red/six.png";
+  static const String redSeven="assets/projectImages/appImages/donate/red/seven.png";
+  static const String redEight="assets/projectImages/appImages/donate/red/eight.png";
+  static const String fasilOne="assets/projectImages/appImages/donate/fasil/one.png";
+  static const String fasilTwo="assets/projectImages/appImages/donate/fasil/two.png";
+  static const String fasilThree="assets/projectImages/appImages/donate/fasil/three.png";
+  static const String fasilFour="assets/projectImages/appImages/donate/fasil/four.png";
+  static const String fasilFive="assets/projectImages/appImages/donate/fasil/five.png";
+  static const String fasilSix="assets/projectImages/appImages/donate/fasil/six.png";
+  static const String fasilSeven="assets/projectImages/appImages/donate/fasil/seven.png";
+  static const String resalaOne="assets/projectImages/appImages/donate/resala/one.png";
+  static const String resalaTwo="assets/projectImages/appImages/donate/resala/two.png";
+  static const String resalaThree="assets/projectImages/appImages/donate/resala/three.png";
+  static const String resalaFour="assets/projectImages/appImages/donate/resala/four.png";
+  static const String resalaFive="assets/projectImages/appImages/donate/resala/five.png";
+  static const String resalaSix="assets/projectImages/appImages/donate/resala/six.png";
+
 
   // lottie assets
   static const String chat="assets/projectImages/json/chat.json";

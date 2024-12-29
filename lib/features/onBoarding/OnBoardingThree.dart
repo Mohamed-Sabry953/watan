@@ -28,12 +28,10 @@ class OnboardingThree extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.r),
                   child: SvgPicture.asset(Images.onBoardingBoycott, height: 250,width: 400,fit: BoxFit.fill,)), // استبدل 'assets/phone.png' بمسار الصورة
               const SizedBox(height: 20),
-
-
-              const Text(
-                "Find Your Destination\nAnd What Happen\nAround You",
+               Text(
+                "Kown about the\nboycott product",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600),
               ),
               const Spacer(flex: 2,),
               // الزر

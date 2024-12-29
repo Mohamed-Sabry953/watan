@@ -1,3 +1,4 @@
+import 'package:final_project_2024/core/utils/constant/images.dart';
 import 'package:final_project_2024/features/home/presentation/manger/cubit/home_cubit.dart';
 import 'package:final_project_2024/features/home/presentation/ui/widgets/user_info_data.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +131,11 @@ class NewsCard extends StatelessWidget {
               ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(12)),
-                child: HomeCubit.get(context).homeRepoImp.latestPosts!.data![index].media!.isEmpty?SizedBox(height: 100.h,):SizedBox(
+                child: HomeCubit.get(context).homeRepoImp.latestPosts!.data![index].media!.isEmpty?
+                    Image.asset(Images.watanApp,
+                      height: 160.h,
+                      width: double.infinity,
+                    ):SizedBox(
                   height: 160.h,
                   width: double.infinity,
                   child: Image.network(HomeCubit.get(context).homeRepoImp.latestPosts?.data?[index].media?[0]??"",
@@ -151,6 +156,7 @@ class NewsCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                      UserInfoRow(index: index,),
                     SizedBox(height: 8.h),
                     Text(

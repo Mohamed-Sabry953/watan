@@ -31,7 +31,7 @@ class OnboardingTwo extends StatelessWidget {
 
 
               const Text(
-                "Find Your Destination\nAnd What Happen\nAround You",
+                "Share your thoughts\nAnd your Opinions\nwith other",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18),
               ),

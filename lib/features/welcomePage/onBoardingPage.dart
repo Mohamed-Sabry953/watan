@@ -64,7 +64,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
                 builder: (context, child) {
                   return Transform.scale(
                     scale: _scaleAnimation.value,
-                    child: SvgPicture.asset(Images.onBoardingOne,),
+                    child: SvgPicture.asset(Images.onBoarding,),
                   );
                 },
               ),
