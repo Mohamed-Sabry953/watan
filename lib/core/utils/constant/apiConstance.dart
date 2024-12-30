@@ -21,7 +21,7 @@ class ApiConstance{
   static const String setNewPost = '$baseUrl/api/posts';
 
   //===========================Boycott========================================
-  static const String alternative = '$baseUrl/api/products/all';
+  static const String alternative = '$baseUrl/api/category/all';
   static const String checkBoycott = '$baseUrl/api/check-code_name';
 
   //===========================Profile========================================

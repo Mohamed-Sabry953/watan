@@ -5,7 +5,7 @@ sealed class BoycottState {}
 final class BoycottInitial extends BoycottState {}
 final class BoycottLoadingState extends BoycottState {}
 final class BoycottGetProductSucState extends BoycottState {
-  final AlternativeModel alternativeModel;
+  final TestAlternitive alternativeModel;
 
   BoycottGetProductSucState(this.alternativeModel);
 }
@@ -14,8 +14,22 @@ final class BoycottGetProductFailState extends BoycottState {
 
   BoycottGetProductFailState(this.error);
 }
-final class BoycottCheckProductSucState extends BoycottState {
+
+final class BoycottGetBoycott_ProductSucState extends BoycottState {
   final BoycottModel boycottModel;
+
+  BoycottGetBoycott_ProductSucState(this.boycottModel);
+
+}
+final class BoycottGetBoycott_ProductFailState extends BoycottState {
+  final String error;
+
+  BoycottGetBoycott_ProductFailState(this.error);
+
+}
+
+final class BoycottCheckProductSucState extends BoycottState {
+  final TestCodeModel boycottModel;
 
   BoycottCheckProductSucState(this.boycottModel);
 }

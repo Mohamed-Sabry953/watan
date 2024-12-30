@@ -92,7 +92,7 @@ class _Qr_BodyState extends State<Qr_Body> {
                     );
                     setState(() {
                       result = res as String;
-                      BoycottCubit.get(context).checkBoycott(context,code: "6223001366379");
+                      BoycottCubit.get(context).checkBoycott(context,code: result);
                     });
                   },
                   child: Center(

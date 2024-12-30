@@ -7,23 +7,18 @@ class AlternativeModel {
   AlternativeModel.fromJson(dynamic json) {
     success = json['success'];
     message = json['message'];
-    if (json['data'] != null) {
-      data = [];
-      json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
-      });
-    }
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   bool? success;
   String? message;
-  List<Data>? data;
+  Data? data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['success'] = success;
     map['message'] = message;
     if (data != null) {
-      map['data'] = data?.map((v) => v.toJson()).toList();
+      map['data'] = data?.toJson();
     }
     return map;
   }
@@ -32,32 +27,60 @@ class AlternativeModel {
 
 class Data {
   Data({
-      this.id, 
-      this.name, 
-      this.price, 
-      this.image, 
-      this.productType,});
+      this.msg, 
+      this.categoryDesc, 
+      this.categoryPhoto, 
+      this.alternatives,});
 
   Data.fromJson(dynamic json) {
-    id = json['id'];
-    name = json['name'];
-    price = json['price'];
-    image = json['image'];
-    productType = json['product_type'];
+    msg = json['msg'];
+    categoryDesc = json['category_desc'];
+    categoryPhoto = json['category_photo'];
+    if (json['alternatives'] != null) {
+      alternatives = [];
+      json['alternatives'].forEach((v) {
+        alternatives?.add(Alternatives.fromJson(v));
+      });
+    }
   }
-  num? id;
-  String? name;
-  String? price;
-  String? image;
-  String? productType;
+  String? msg;
+  String? categoryDesc;
+  String? categoryPhoto;
+  List<Alternatives>? alternatives;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
-    map['name'] = name;
-    map['price'] = price;
-    map['image'] = image;
-    map['product_type'] = productType;
+    map['msg'] = msg;
+    map['category_desc'] = categoryDesc;
+    map['category_photo'] = categoryPhoto;
+    if (alternatives != null) {
+      map['alternatives'] = alternatives?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+
+}
+
+class Alternatives {
+  Alternatives({
+      this.productName, 
+      this.productPrice, 
+      this.productImage,});
+
+  Alternatives.fromJson(dynamic json) {
+    productName = json['product_name'];
+    productPrice = json['product_price'];
+    productImage = json['product_image'];
+  }
+  String? productName;
+  String? productPrice;
+  String? productImage;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['product_name'] = productName;
+    map['product_price'] = productPrice;
+    map['product_image'] = productImage;
     return map;
   }
 

@@ -1,5 +1,4 @@
 import 'package:final_project_2024/core/services/responsiveUi/responsive_height.dart';
-import 'package:final_project_2024/features/home/presentation/manger/cubit/home_cubit.dart';
 import 'package:final_project_2024/features/servicesFeature/boycott/presentation/manger/boycott_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,7 +76,7 @@ class BoycottCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.network(
-                    BoycottCubit.get(context).boycottRepoImp.alternativeModel?.data?[index].image?? "",
+                    BoycottCubit.get(context).boycottRepoImp.alternativeModel?.data?[index].categoryPhoto ?? "",
                     height: widgetHeight(context: context, height: 100),
                     errorBuilder: (context, error, stackTrace) => Icon(
                       Icons.broken_image,
@@ -87,7 +86,7 @@ class BoycottCard extends StatelessWidget {
                 ),
                 SizedBox(height: widgetHeight(context: context, height: 25)),
                 Text(
-                  BoycottCubit.get(context).boycottRepoImp.alternativeModel?.data?[index].name ?? "",
+                  BoycottCubit.get(context).productName,
                   style: const TextStyle(
                     fontSize: 18,
                     color: Color(0XFF000000),
@@ -95,7 +94,7 @@ class BoycottCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  BoycottCubit.get(context).boycottRepoImp.alternativeModel?.data?[index].productType ?? "",
+                  BoycottCubit.get(context).boycottRepoImp.alternativeModel?.data?[index].categoryType ?? "",
                   style: const TextStyle(
                     color: Color(0XFF000000),
                     fontSize: 10,

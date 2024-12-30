@@ -4,8 +4,12 @@ import 'package:final_project_2024/features/servicesFeature/boycott/data/models/
 import 'package:final_project_2024/features/servicesFeature/boycott/data/models/BoycottModel.dart';
 
 import '../../../../../core/errors/failure.dart';
+import '../models/TestAlternitive.dart';
+import '../models/TestCodeModel.dart';
 
 abstract class BoycottRepo{
-  Future<Either<Failure,AlternativeModel>>getAlternative();
-  Future<Either<Failure,BoycottModel>>checkBoycott({required String code});
+  Future<Either<Failure,TestAlternitive>>getAlternative();
+  Future<Either<Failure,BoycottModel>>getboycott_product({required String boycottname});
+
+  Future<Either<Failure,TestCodeModel>>checkBoycott({required String code});
 }
