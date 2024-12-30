@@ -1,8 +1,10 @@
 import 'package:final_project_2024/config/routes/app_routes.dart';
 import 'package:final_project_2024/core/utils/constant/generic_variables.dart';
-import 'package:final_project_2024/features/servicesFeature/boycott/data/models/AlternativeModel.dart';
+import 'package:final_project_2024/features/servicesFeature/boycott/data/models/AllAlternitiveModel.dart';
+import 'package:final_project_2024/features/servicesFeature/boycott/data/models/AllBoycottModel.dart';
 import 'package:final_project_2024/features/servicesFeature/boycott/data/models/BoycottModel.dart';
 import 'package:final_project_2024/features/servicesFeature/boycott/data/repository/boycott_repo_imp.dart';
+import 'package:final_project_2024/features/servicesFeature/boycott/presentation/ui/widgets/boycuttMessage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +21,25 @@ class BoycottCubit extends Cubit<BoycottState> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   static BoycottCubit get(context)=>BlocProvider.of(context);
 
-  Future<void> getProducts() async {
+  Future<void> getallAtrenitiveproducts() async {
     emit(BoycottLoadingState());
-    var result = await boycottRepoImp.getAlternative(
+    var result = await boycottRepoImp.getAtrenitive(
+    );
+    result.fold(
+            (failure) { emit(BoycottGetAllAtrenitiveFailState(failure.errMessage));
+        },
+            (productsModel) { emit(BoycottGetAllAtrenitiveSucState(productsModel),
+        );
+        if (kDebugMode) {
+          print(productsModel);
+        }
+        }
+    );
+
+  }
+  Future<void> getallBoycottproducts() async {
+    emit(BoycottLoadingState());
+    var result = await boycottRepoImp.getBoycott(
     );
     result.fold(
             (failure) { emit(BoycottGetProductFailState(failure.errMessage));
@@ -35,6 +53,10 @@ class BoycottCubit extends Cubit<BoycottState> {
     );
 
   }
+
+
+
+
   Future<void> getboycuttProducts(BuildContext context,{required String boycottname}) async {
 
     var result = await boycottRepoImp.getboycott_product(boycottname: boycottname
@@ -52,6 +74,7 @@ class BoycottCubit extends Cubit<BoycottState> {
               GenericVariables.alternativeMsg=boycottModel.dataMsg;
             }
               Navigator.pushNamed(context, AppRoutesName.resultScreen);
+
         if (kDebugMode) {
           print(boycottModel);
         }
@@ -72,11 +95,13 @@ class BoycottCubit extends Cubit<BoycottState> {
             (registerItem) async {
               emit(BoycottCheckProductSucState(registerItem),);
               if(registerItem.data?["data"]!="هذا المنتج ليس في المقاطعه"){
-                await getboycuttProducts(context,boycottname:registerItem.data?["category_name"] );
+                 getboycuttProducts(context,boycottname:"oreo" );
               }
               else{
                 GenericVariables.alternativeMsg=registerItem.data?["data"];
-                Navigator.pushNamed(context, AppRoutesName.resultScreen);
+                showDialog(context: context, builder: (context) {
+                  return boycuttMessage(text: registerItem.data?["data"]);
+                },);
               }
         if (kDebugMode) {
           print("================================");

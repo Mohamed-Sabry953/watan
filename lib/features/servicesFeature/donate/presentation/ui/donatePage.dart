@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../core/utils/widgets/drawer.dart';
+
 class DonateScreen extends StatelessWidget {
   const DonateScreen({super.key});
 
@@ -17,6 +19,7 @@ class DonateScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      drawer: CustomDarwer(),
       backgroundColor: Colors.white,
       body: Container(
         decoration: const BoxDecoration(
@@ -41,9 +44,14 @@ class DonateScreen extends StatelessWidget {
                         color: Colors.black,
                         fontWeight: FontWeight.w600),
                   ),
-                  Icon(
-                    Icons.menu,
-                    size: 24.sp,
+                  InkWell(
+                    onTap: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    child: Icon(
+                      Icons.menu,
+                      size: 24.sp,
+                    ),
                   )
                 ],
               ),

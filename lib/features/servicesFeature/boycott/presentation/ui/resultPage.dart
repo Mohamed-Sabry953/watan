@@ -102,7 +102,11 @@ class SearchBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 16),
       child: Row(
         children: [
-           SvgPicture.asset(Images.backArrowIos),
+           InkWell(
+               onTap: () {
+                 Navigator.pop(context);
+               },
+               child: SvgPicture.asset(Images.backArrowIos)),
           const SizedBox(width: 10),
           Expanded(
             child: Container(
@@ -174,11 +178,6 @@ class DescriptionSection extends StatelessWidget {
               color: GenericVariables.alternativeMsg==null?Colors.redAccent:Colors.green,
               fontSize: 24,
             ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Macdonalds is an american fast food company that has spread all over world',
-            style: TextStyle(fontSize: 16),
           ),
         ],
       ),

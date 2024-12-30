@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../core/cache/cachData.dart';
+
 class OnboardingThree extends StatelessWidget {
   const OnboardingThree({super.key});
 
@@ -37,6 +39,7 @@ class OnboardingThree extends StatelessWidget {
               // الزر
               InkWell(
                 onTap: (){
+                  CacheData.getUserToken(key: "user_token")==null?Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.loginScreen, (route) => false,):
                   Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.homeLayout, (route) => false,);
                 },
                 child: Container(

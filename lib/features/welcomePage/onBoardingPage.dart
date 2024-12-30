@@ -40,8 +40,7 @@ class _WelcomePageState extends State<WelcomePage> with SingleTickerProviderStat
   }
   void navigate(){
     Future.delayed(Duration(seconds: 5),() {
-      CacheData.getUserToken(key: "user_token")==null?Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.loginScreen, (route) => false,):
-      Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.homeLayout, (route) => false,);
+      Navigator.pushNamedAndRemoveUntil(context, AppRoutesName.onboardingOne, (route) => false,);
     },);
   }
   @override

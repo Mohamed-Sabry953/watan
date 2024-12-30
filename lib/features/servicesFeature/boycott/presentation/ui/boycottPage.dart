@@ -15,7 +15,8 @@ class Boycottpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => BoycottCubit(sl<BoycottRepoImp>())..getProducts(),
+    return
+        BlocProvider(create: (context) => BoycottCubit(sl<BoycottRepoImp>())..getallBoycottproducts()..getallAtrenitiveproducts(),
     child: BlocBuilder<BoycottCubit,BoycottState>(builder: (context, state) {
       return Scaffold(
         key: BoycottCubit.get(context).scaffoldKey,

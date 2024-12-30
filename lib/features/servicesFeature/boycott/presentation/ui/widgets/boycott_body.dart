@@ -1,12 +1,31 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
 import 'package:final_project_2024/core/services/responsiveUi/responsive_height.dart';
+import 'package:final_project_2024/features/servicesFeature/boycott/presentation/ui/widgets/alternativeCard.dart';
 import 'package:flutter/material.dart';
 
 import 'Boycott_Card.dart';
 
-class Boycottpage_Body extends StatelessWidget {
+class Boycottpage_Body extends StatefulWidget {
   const Boycottpage_Body({super.key});
 
+  @override
+  State<Boycottpage_Body> createState() => _Boycottpage_BodyState();
+}
+
+class _Boycottpage_BodyState extends State<Boycottpage_Body> with TickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
@@ -40,6 +59,7 @@ class Boycottpage_Body extends StatelessWidget {
         height: 50,
         child: DefaultTabController(
           length: 2,
+          initialIndex: 1,
           child: SegmentedTabControl(
             textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             tabTextColor: Colors.black,
@@ -51,16 +71,17 @@ class Boycottpage_Body extends StatelessWidget {
               color: Color(0XFFEBEBEB),
               borderRadius: BorderRadius.circular(30),
             ),
+            controller: tabController,
             tabs: [
               SegmentTab(
-                  label: "Boycott",
 
+                  label: "Boycott",
                   // textColor: Colors.black,
-                  selectedTextColor: Colors.black),
+                  selectedTextColor: Colors.blue),
               SegmentTab(
                   label: "Substitute",
                   // textColor: Colors.black,
-                  selectedTextColor: Colors.black),
+                  selectedTextColor: Colors.green),
             ],
           ),
         ),
@@ -79,7 +100,7 @@ class Boycottpage_Body extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: BoycottCard(index: index,),
+              child: tabController.index==0?BoycottCard(index: index,):AlternativeCard(index: index),
             );
           },
         ),

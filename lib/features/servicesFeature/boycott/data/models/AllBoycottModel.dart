@@ -1,10 +1,10 @@
-class AlternativeModel {
-  AlternativeModel({
+class AllBoycottModel {
+  AllBoycottModel({
       this.success, 
       this.message, 
       this.data,});
 
-  AlternativeModel.fromJson(dynamic json) {
+  AllBoycottModel.fromJson(dynamic json) {
     success = json['success'];
     message = json['message'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;

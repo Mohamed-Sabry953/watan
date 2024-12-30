@@ -30,9 +30,14 @@ class _Qr_BodyState extends State<Qr_Body> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.arrow_back_ios_new,
-                color: Colors.black,
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.black,
+                ),
               ),
               Text(
                 "Boycott",

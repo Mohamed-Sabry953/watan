@@ -15,6 +15,18 @@ final class BoycottGetProductFailState extends BoycottState {
   BoycottGetProductFailState(this.error);
 }
 
+
+final class BoycottGetAllAtrenitiveSucState extends BoycottState {
+  final AllAlternitiveModel allAlternitiveModel;
+
+  BoycottGetAllAtrenitiveSucState(this.allAlternitiveModel);
+}
+final class BoycottGetAllAtrenitiveFailState extends BoycottState {
+  final String error;
+
+  BoycottGetAllAtrenitiveFailState(this.error);
+}
+
 final class BoycottGetBoycott_ProductSucState extends BoycottState {
   final BoycottModel boycottModel;
 

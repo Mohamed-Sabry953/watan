@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../core/utils/widgets/drawer.dart';
+
 class ServicesPage extends StatelessWidget {
    ServicesPage({super.key});
   final List<String>describtion=[
@@ -28,6 +30,7 @@ class ServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primary,
+      drawer: CustomDarwer(),
       body: Column(
         children: [
           SizedBox(
@@ -51,9 +54,14 @@ class ServicesPage extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       fontFamily: "Petrona"),
                 ),
-                SvgPicture.asset(
-                  Images.drawerIcon,
-                  color: Colors.white,
+                InkWell(
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  child: SvgPicture.asset(
+                    Images.drawerIcon,
+                    color: Colors.white,
+                  ),
                 )
               ],
             ),
