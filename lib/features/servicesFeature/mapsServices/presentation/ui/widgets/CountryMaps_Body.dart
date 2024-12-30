@@ -44,6 +44,14 @@ class _CountryMaps_BodyState extends State<CountryMaps_Body> {
 
   @override
   Widget build(BuildContext context) {
+    List<Image>counrtys=[
+      Image.asset("assets/projectImages/appImages/donate/magdi/country1.png",fit: BoxFit.fill,),
+      Image.asset("assets/projectImages/appImages/donate/magdi/country2.png",fit: BoxFit.fill),
+      Image.asset("assets/projectImages/appImages/donate/magdi/country 3.png",fit: BoxFit.fill),
+      Image.asset("assets/projectImages/appImages/donate/magdi/country4.png",fit: BoxFit.fill),
+
+
+    ];
     final size=MediaQuery.of(context).size;
     return BlocProvider(create: (context) => ChatbotCubit(sl<ChatBotRepoImp>()),
     child: BlocBuilder<ChatbotCubit,ChatbotState>(builder: (context, state) {
@@ -54,17 +62,14 @@ class _CountryMaps_BodyState extends State<CountryMaps_Body> {
             width: double.infinity,
             child: CarouselSlider.builder(
 
-              itemCount: 5,
+              itemCount: 4,
               itemBuilder: (context, index, realIndex) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 1),
                   child: Container(
-                      height: 140,
-                      width: 120,
-                      child: Image.asset(
-                        Images.resalaOne,
-                        fit: BoxFit.fill,
-                      )),
+                      height: 130,
+                      width: 140,
+                      child: counrtys[index]),
                 );
               }, options: CarouselOptions(
                 height: 160,
@@ -136,6 +141,8 @@ class _CountryMaps_BodyState extends State<CountryMaps_Body> {
                   ChatbotCubit.get(context).sendMessage((){
                     scrollToBottom();
                   });
+                  showModalBottomSheet(isScrollControlled: true,
+                    context: context, builder: (context) => Container(height: 400,),);
                 },
                 child:  Icon(Icons.send,color: AppColors.primary,size: 30.sp,),
               ),
